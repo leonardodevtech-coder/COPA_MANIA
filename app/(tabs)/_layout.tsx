@@ -1,33 +1,43 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { Platform } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
+        headerShown: false, // Esconde aquele cabeçalho feio padrão
+        tabBarActiveTintColor: '#E0B953', // Cor dourada quando o botão está clicado
+        tabBarInactiveTintColor: '#888', // Cor cinza quando não está clicado
+        tabBarStyle: {
+          backgroundColor: '#131A2F', // Azul marinho escuro do menu
+          borderTopColor: '#1E2538', // Borda sutil
+          paddingBottom: Platform.OS === 'ios' ? 20 : 5,
+          height: Platform.OS === 'ios' ? 85 : 60,
+        }
       }}>
+      
+      {/* TELAS ESCONDIDAS (O usuário navega por elas, mas não têm botão no menu) */}
+      <Tabs.Screen name="index" options={{ href: null }} />
+      <Tabs.Screen name="cadastro" options={{ href: null }} />
+      <Tabs.Screen name="login" options={{ href: null }} />
+
+      {/* TELAS DO MENU INFERIOR (O que aparece para o usuário) */}
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: 'Início',
+          tabBarIcon: ({ color }) => <Ionicons name="home" size={24} color={color} />,
         }}
       />
+      
+      {/* Botão do Álbum (vamos deixar já pronto para a próxima etapa!) */}
       <Tabs.Screen
-        name="explore"
+        name="album"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Álbum',
+          tabBarIcon: ({ color }) => <Ionicons name="book" size={24} color={color} />,
         }}
       />
     </Tabs>
