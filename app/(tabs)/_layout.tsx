@@ -35,10 +35,17 @@ export default function TabLayout() {
       <Tabs.Screen
         name="abrir_album" 
         options={{
-          title: 'Abrir Álbum',
+          title: 'Álbum',
           tabBarIcon: ({ color }) => <Ionicons name="book" size={24} color={color} />,
         }}
       />
+      <Tabs.Screen
+  name="copa2026"
+  options={{
+    title: 'Copa 2026',
+    tabBarIcon: ({ color }) => <Ionicons name="map" size={24} color={color} />,
+  }}
+/>
     </Tabs>
   );
 }

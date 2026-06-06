@@ -1,0 +1,147 @@
+{
+  "curiosidades": [
+    {
+      "icone": "globe-americas",
+      "titulo": "A Maior de Todas",
+      "texto": "Pela primeira vez na história, a Copa do Mundo contará com 48 seleções, divididas em 12 grupos de 4 times."
+    },
+    {
+      "icone": "calendar-alt",
+      "titulo": "Maratona de Jogos",
+      "texto": "O torneio terá um recorde absoluto de 104 partidas disputadas ao longo de 39 dias de competição."
+    },
+    {
+      "icone": "project-diagram",
+      "titulo": "Novo Mata-Mata",
+      "texto": "Avançam os dois melhores de cada grupo e os oito melhores terceiros colocados para uma nova fase: os 16-avos de final."
+    }
+  ],
+  "bolaOficial": {
+    "nome": "Adidas Trionda",
+    "imagem": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQkftxhm3KBQlvp47OY7m-YfNG-Eup13DXXdY5m-HPiFVC-rqzRpEkxIfhFPI9ZOEQDMPIaLVDYtbkOCV0m5_cLXbKt_G9f2q-aD6yAh1nlEJvBC2hxFc4ZCdDJVqOuhP6uVMZLpYWvmg&usqp=CAc",
+    "descricao": "A bola oficial da Copa de 2026, com design que une as culturas de Canadá, EUA e México."
+  },
+  "mascotes": [
+    {
+      "nome": "Zayu",
+      "animal": "Jaguar",
+      "pais": "México",
+      "imagem": "https://img.band.com.br/image/2026/03/30/zayu-onca-pintada-da-copa-do-mundo-16157.jpg"
+    },
+    {
+      "nome": "Maple",
+      "animal": "Alce",
+      "pais": "Canadá",
+      "imagem": "https://img.band.com.br/image/2026/03/30/maple-mascote-da-copa-do-mundo-de-2026-161149.jpg"
+    },
+    {
+      "nome": "Clutch",
+      "animal": "Águia Careca",
+      "pais": "Estados Unidos",
+      "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHNM1Qyai2RtTbAg-qgGGJn80r35IR7dkvmA&s"
+    }
+  ],
+  "paisesSede": [
+    { "nome": "Canadá", "bandeira": "https://flagcdn.com/w160/ca.png" },
+    { "nome": "Estados Unidos", "bandeira": "https://flagcdn.com/w160/us.png" },
+    { "nome": "México", "bandeira": "https://www.eccobandeiras.com.br/image/cache/catalog/antigas/M%C3%A9xico-1111x740.jpg" }
+  ],
+ "estadios": [
+    { "nome": "Estadio Azteca", "cidade": "Cidade do México, MEX", "capacidade": "83.264", "fundacao": "1966", "imagem": "https://classic.exame.com/wp-content/uploads/2026/03/GettyImages-2268027208.jpg" },
+    { "nome": "Estadio BBVA", "cidade": "Monterrey, MEX", "capacidade": "53.500", "fundacao": "2015", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuJ7w8vcGK0eWBxfLWhbfZ0guWq_--1yLnkA&s" },
+    { "nome": "Estadio Akron", "cidade": "Guadalajara, MEX", "capacidade": "49.850", "fundacao": "2010", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc0E4NpY6dapu_jW0wna4ogPzc5eKz44iBRw&s"},
+    { "nome": "BC Place", "cidade": "Vancouver, CAN", "capacidade": "54.500", "fundacao": "1983", "imagem": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/BC_Place_%28Vancouver%29.jpg/250px-BC_Place_%28Vancouver%29.jpg"},
+    { "nome": "BMO Field", "cidade": "Toronto, CAN", "capacidade": "30.000", "fundacao": "2007", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2i9DBcFVZl-y3UILZs9Mjb6-xIQozh2Ajvg&s" },
+    { "nome": "MetLife Stadium", "cidade": "Nova York/Nova Jersey, EUA", "capacidade": "82.500", "fundacao": "2010", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbFtyTW_LapY0uDmH-1LRPY4B4JHz0p5YwVA&s" },
+    { "nome": "AT&T Stadium", "cidade": "Dallas, EUA", "capacidade": "80.000", "fundacao": "2009", "imagem": "https://t4.ftcdn.net/jpg/05/49/05/97/360_F_549059713_s0ntRZTHF1yB2vkJHYbzOKR8ZbsOLJNf.jpg" },
+    { "nome": "Arrowhead Stadium", "cidade": "Kansas City, EUA", "capacidade": "76.416", "fundacao": "1972", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGnvAhuSRzit6FyPTqefh8Rfxtl975Ia_InQ&s" },
+    { "nome": "Mercedes-Benz Stadium", "cidade": "Atlanta, EUA", "capacidade": "71.000", "fundacao": "2017", "imagem": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Mercedes_Benz_Stadium_time_lapse_capture_2017-08-13.jpg/330px-Mercedes_Benz_Stadium_time_lapse_capture_2017-08-13.jpg" },
+    { "nome": "Gillette Stadium", "cidade": "Boston, EUA", "capacidade": "65.878", "fundacao": "2002", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjZ3otANy9Ntv8IB-rZW2FTvOWsqbb672Qcg&s" },
+    { "nome": "NRG Stadium", "cidade": "Houston, EUA", "capacidade": "72.220", "fundacao": "2002", "imagem": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Nrg_stadium.jpg" },
+    { "nome": "SoFi Stadium", "cidade": "Los Angeles, EUA", "capacidade": "70.240", "fundacao": "2020", "imagem": "https://burtonhousehotel.com/wp-content/uploads/2024/04/SoFi-Stadium-scaled.jpg" },
+    { "nome": "Hard Rock Stadium", "cidade": "Miami, EUA", "capacidade": "64.767", "fundacao": "1987", "imagem": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/200127-H-PX819-0092.jpg/330px-200127-H-PX819-0092.jpg" },
+    { "nome": "Lincoln Financial Field", "cidade": "Filadélfia, EUA", "capacidade": "69.796", "fundacao": "2003", "imagem": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Lincoln_Financial_Field_%28Aerial_view%29.jpg" },
+    { "nome": "Lumen Field", "cidade": "Seattle, EUA", "capacidade": "68.740", "fundacao": "2002", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgP-WQpaYtKLC0ZdiI9_-y-Hioc7GPFAWCBg&s" },
+    { "nome": "Levi's Stadium", "cidade": "São Francisco, EUA", "capacidade": "68.500", "fundacao": "2014", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIDvYxpym7PdSZ8k0bHEZ7KznsY0BMJPfqFg&s" }
+  ],
+  "divisoes": [
+    {
+      "nome": "CONMEBOL (América do Sul)",
+      "selecoes": [
+        { "nome": "Brasil", "bandeira": "https://flagcdn.com/w80/br.png" },
+        { "nome": "Argentina", "bandeira": "https://flagcdn.com/w80/ar.png" },
+        { "nome": "Uruguai", "bandeira": "https://flagcdn.com/w80/uy.png" },
+        { "nome": "Colômbia", "bandeira": "https://flagcdn.com/w80/co.png" },
+        { "nome": "Equador", "bandeira": "https://flagcdn.com/w80/ec.png" },
+        { "nome": "Venezuela", "bandeira": "https://flagcdn.com/w80/ve.png" },
+        { "nome": "Paraguai", "bandeira": "https://flagcdn.com/w80/py.png" }
+      ]
+    },
+    {
+      "nome": "CONCACAF (América do Norte e Central)",
+      "selecoes": [
+        { "nome": "Canadá", "bandeira": "https://flagcdn.com/w80/ca.png" },
+        { "nome": "Estados Unidos", "bandeira": "https://flagcdn.com/w80/us.png" },
+        { "nome": "México", "bandeira": "https://flagcdn.com/w80/mx.png" },
+        { "nome": "Costa Rica", "bandeira": "https://flagcdn.com/w80/cr.png" },
+        { "nome": "Panamá", "bandeira": "https://flagcdn.com/w80/pa.png" },
+        { "nome": "Jamaica", "bandeira": "https://flagcdn.com/w80/jm.png" }
+      ]
+    },
+    {
+      "nome": "UEFA (Europa)",
+      "selecoes": [
+        { "nome": "França", "bandeira": "https://flagcdn.com/w80/fr.png" },
+        { "nome": "Inglaterra", "bandeira": "https://flagcdn.com/w80/gb-eng.png" },
+        { "nome": "Espanha", "bandeira": "https://flagcdn.com/w80/es.png" },
+        { "nome": "Alemanha", "bandeira": "https://flagcdn.com/w80/de.png" },
+        { "nome": "Portugal", "bandeira": "https://flagcdn.com/w80/pt.png" },
+        { "nome": "Itália", "bandeira": "https://flagcdn.com/w80/it.png" },
+        { "nome": "Holanda", "bandeira": "https://flagcdn.com/w80/nl.png" },
+        { "nome": "Bélgica", "bandeira": "https://flagcdn.com/w80/be.png" },
+        { "nome": "Croácia", "bandeira": "https://flagcdn.com/w80/hr.png" },
+        { "nome": "Suíça", "bandeira": "https://flagcdn.com/w80/ch.png" },
+        { "nome": "Dinamarca", "bandeira": "https://flagcdn.com/w80/dk.png" },
+        { "nome": "Áustria", "bandeira": "https://flagcdn.com/w80/at.png" },
+        { "nome": "Sérvia", "bandeira": "https://flagcdn.com/w80/rs.png" },
+        { "nome": "Polônia", "bandeira": "https://flagcdn.com/w80/pl.png" },
+        { "nome": "Escócia", "bandeira": "https://flagcdn.com/w80/gb-sct.png" },
+        { "nome": "Ucrânia", "bandeira": "https://flagcdn.com/w80/ua.png" }
+      ]
+    },
+    {
+      "nome": "CAF (África)",
+      "selecoes": [
+        { "nome": "Marrocos", "bandeira": "https://flagcdn.com/w80/ma.png" },
+        { "nome": "Senegal", "bandeira": "https://flagcdn.com/w80/sn.png" },
+        { "nome": "Egito", "bandeira": "https://flagcdn.com/w80/eg.png" },
+        { "nome": "Costa do Marfim", "bandeira": "https://flagcdn.com/w80/ci.png" },
+        { "nome": "Nigéria", "bandeira": "https://flagcdn.com/w80/ng.png" },
+        { "nome": "Argélia", "bandeira": "https://flagcdn.com/w80/dz.png" },
+        { "nome": "Camarões", "bandeira": "https://flagcdn.com/w80/cm.png" },
+        { "nome": "Mali", "bandeira": "https://flagcdn.com/w80/ml.png" },
+        { "nome": "Gana", "bandeira": "https://flagcdn.com/w80/gh.png" }
+      ]
+    },
+    {
+      "nome": "AFC (Ásia)",
+      "selecoes": [
+        { "nome": "Japão", "bandeira": "https://flagcdn.com/w80/jp.png" },
+        { "nome": "Coreia do Sul", "bandeira": "https://flagcdn.com/w80/kr.png" },
+        { "nome": "Irã", "bandeira": "https://flagcdn.com/w80/ir.png" },
+        { "nome": "Arábia Saudita", "bandeira": "https://flagcdn.com/w80/sa.png" },
+        { "nome": "Austrália", "bandeira": "https://flagcdn.com/w80/au.png" },
+        { "nome": "Catar", "bandeira": "https://flagcdn.com/w80/qa.png" },
+        { "nome": "Uzbequistão", "bandeira": "https://flagcdn.com/w80/uz.png" },
+        { "nome": "Iraque", "bandeira": "https://flagcdn.com/w80/iq.png" },
+        { "nome": "Emirados Árabes", "bandeira": "https://flagcdn.com/w80/ae.png" }
+      ]
+    },
+    {
+      "nome": "OFC (Oceânia)",
+      "selecoes": [
+        { "nome": "Nova Zelândia", "bandeira": "https://flagcdn.com/w80/nz.png" }
+      ]
+    }
+  ]
+}

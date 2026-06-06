@@ -67,6 +67,7 @@ export default function HomeScreen() {
 
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionHeaderTitle}>Aquecimento 2026</Text>
+            
             <View style={styles.grid}>
               <TouchableOpacity style={styles.actionCard} onPress={() => router.push('/quiz' as any)}>
                 <View style={[styles.iconBox, { backgroundColor: 'rgba(224, 185, 83, 0.15)' }]}>
@@ -74,6 +75,7 @@ export default function HomeScreen() {
                 </View>
                 <Text style={styles.cardTitle}>Quiz da Copa</Text>
               </TouchableOpacity>
+              
               <TouchableOpacity style={styles.actionCard} onPress={() => router.push('/loja' as any)}>
                 <View style={[styles.iconBox, { backgroundColor: 'rgba(17, 139, 68, 0.15)' }]}>
                   <FontAwesome5 name="shopping-cart" size={20} color="#118B44" />
@@ -81,10 +83,28 @@ export default function HomeScreen() {
                 <Text style={styles.cardTitle}>Comprar Pacotes</Text>
               </TouchableOpacity>
             </View>
+
+            {/* NOVO CARD: GUIA DA COPA (Ocupa a largura toda) */}
+            <TouchableOpacity 
+              style={styles.fullWidthCard} 
+              activeOpacity={0.8} 
+              onPress={() => router.push('/copa2026' as any)}
+            >
+              <View style={[styles.iconBox, { backgroundColor: 'rgba(224, 185, 83, 0.15)', marginBottom: 0, marginRight: 16 }]}>
+                <Ionicons name="map" size={24} color="#E0B953" />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.cardTitle}>Explorar Copa 2026</Text>
+                <Text style={{ color: '#B0C4DE', fontSize: 12, marginTop: 4 }}>Estádios, Sedes, Mascotes e Seleções</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={20} color="#E0B953" />
+            </TouchableOpacity>
+
           </View>
         </ScrollView>
       </View>
 
+      {/* MENU LATERAL */}
       <Modal visible={menuAberto} transparent animationType="fade">
         <View style={styles.menuOverlay}>
           <View style={styles.menuLateral}>
@@ -108,11 +128,19 @@ export default function HomeScreen() {
                 <Text style={styles.menuItemText}>Quiz da Copa</Text>
                 <Ionicons name={quizExpandido ? "chevron-up" : "chevron-down"} size={20} color="#E0B953" style={{ marginLeft: 'auto' }} />
               </TouchableOpacity>
+              
               {quizExpandido && temasQuiz.map((tema, index) => (
                 <TouchableOpacity key={index} style={[styles.menuItem, { paddingLeft: 60, paddingVertical: 12 }]} onPress={() => navegarPara('/quiz')}>
                   <Text style={{ color: '#B0C4DE', fontSize: 14 }}>{tema.titulo}</Text>
                 </TouchableOpacity>
               ))}
+
+              {/* ITEM DO GUIA NO MENU LATERAL */}
+              <TouchableOpacity style={styles.menuItem} onPress={() => navegarPara('/copa2026')}>
+                <Ionicons name="map" size={24} color="#E0B953" style={styles.menuIcon} />
+                <Text style={styles.menuItemText}>Guia Copa 2026</Text>
+              </TouchableOpacity>
+
               <View style={styles.menuDivider} />
               <TouchableOpacity style={styles.menuItem} onPress={() => navegarPara('/sobre')}>
                 <Ionicons name="information-circle" size={24} color="#B0C4DE" style={styles.menuIcon} />
@@ -153,6 +181,7 @@ const styles = StyleSheet.create({
   heroButtonText: { color: '#FFFFFF', fontSize: 15, fontWeight: 'bold', letterSpacing: 1, marginRight: 10 },
   grid: { flexDirection: 'row', justifyContent: 'space-between' },
   actionCard: { width: '47%', backgroundColor: 'rgba(25, 45, 80, 0.7)', borderRadius: 16, padding: 16, alignItems: 'center', borderWidth: 1, borderColor: 'rgba(255, 255, 255, 0.05)' },
+  fullWidthCard: { flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(25, 45, 80, 0.8)', borderRadius: 16, padding: 16, marginTop: 16, borderWidth: 1, borderColor: 'rgba(255, 255, 255, 0.05)' },
   iconBox: { width: 48, height: 48, borderRadius: 12, justifyContent: 'center', alignItems: 'center', marginBottom: 12 },
   cardTitle: { color: '#FFFFFF', fontSize: 13, fontWeight: '600' },
   menuOverlay: { flex: 1, flexDirection: 'row', backgroundColor: 'rgba(0,0,0,0.6)' },
