@@ -1,7 +1,9 @@
 import { FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
+    Alert,
     ImageBackground,
     KeyboardAvoidingView,
     Platform,
@@ -19,10 +21,36 @@ export default function LoginScreen() {
   
   const router = useRouter(); // Ferramenta de navegação
 
-  function handleLogin() {
-    // Por enquanto, mostra um alerta. No futuro, isso vai validar o usuário.
-    alert(`Acessando o Álbum com o e-mail: ${email}`);
-router.push('/home' as any);  }
+  // Função atualizada apenas com a lógica de validação
+  async function handleLogin() {
+    // 1. Verifica se tem algum campo vazio
+    if (!email || !senha) {
+      return Alert.alert('Atenção', 'Preencha o e-mail e a senha para acessar.');
+    }
+
+    try {
+      // 2. Busca os dados salvos no celular (cadastrados na outra tela)
+      const userDataString = await AsyncStorage.getItem('@copamania_user');
+      
+      if (!userDataString) {
+        return Alert.alert('Ops!', 'Nenhuma conta encontrada. Faça seu cadastro primeiro.');
+      }
+
+      const userData = JSON.parse(userDataString);
+
+      // 3. Verifica se o e-mail e a senha batem com o cadastro
+      if (email.toLowerCase() !== userData.email || senha !== userData.senha) {
+        return Alert.alert('Cartão Vermelho', 'E-mail ou senha incorretos.');
+      }
+
+      // 4. Se deu tudo certo, vai para a Home
+      Alert.alert('Bem-vindo de volta!', `Acessando o álbum de ${userData.nome}!`);
+      router.replace('/home' as any);
+
+    } catch (error) {
+      Alert.alert('Erro', 'Não foi possível fazer o login.');
+    }
+  }
 
   return (
     /* Fundo com a imagem desfocada (logo ou background.jpg) */

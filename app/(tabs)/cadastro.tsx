@@ -30,25 +30,55 @@ export default function CadastroScreen() {
       return Alert.alert('Atenção', 'Preencha todos os campos para entrar em campo!');
     }
 
-    // 2. Verifica se as senhas são iguais (O Cartão Amarelo!)
+    // 2. Valida se o formato do e-mail é aceitável
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(email)) {
+      return Alert.alert('Atenção', 'Por favor, digite um e-mail válido!');
+    }
+
+    // 3. Valida o tamanho mínimo de segurança para a senha
+    if (senha.length < 6) {
+      return Alert.alert('Atenção', 'A sua senha precisa ter pelo menos 6 caracteres.');
+    }
+
+    // 4. Verifica se as senhas são iguais
     if (senha !== confirmarSenha) {
       return Alert.alert('Cartão Amarelo', 'As senhas não coincidem. Tente novamente.');
     }
 
     try {
-      // 3. Empacota os dados do usuário
+      // --- NOVA VERIFICAÇÃO DE DUPLICIDADE ---
+      // Busca no banco se já existe alguém cadastrado
+      const existingDataString = await AsyncStorage.getItem('@copamania_user');
+      
+      if (existingDataString) {
+        const existingData = JSON.parse(existingDataString);
+        
+        // Compara o e-mail digitado com o e-mail salvo
+        if (existingData.email === email.toLowerCase().trim()) {
+          return Alert.alert('Impedido!', 'Este e-mail já está cadastrado no nosso álbum. Vá para a tela de Login.');
+        }
+        
+        // Compara o nome digitado com o nome salvo
+        if (existingData.nome.toLowerCase() === nome.toLowerCase().trim()) {
+          return Alert.alert('Impedido!', 'Este nome de colecionador já está em uso. Escolha outro nome.');
+        }
+      }
+      // ----------------------------------------
+
+      // 5. Empacota os dados do usuário
       const userData = {
-        nome: nome,
-        email: email.toLowerCase(),
+        nome: nome.trim(),
+        email: email.toLowerCase().trim(),
         senha: senha
       };
 
-      // 4. Salva no celular
+      // 6. Salva no celular
       await AsyncStorage.setItem('@copamania_user', JSON.stringify(userData));
       
       Alert.alert('Golaço!', 'Conta criada com sucesso. Faça seu login!');
       
-      // 5. Limpa os campos e vai para a tela de login
+      // 7. Limpa os campos e vai para a tela de login
       setNome(''); setEmail(''); setSenha(''); setConfirmarSenha('');
       router.push('/login' as any);
 
