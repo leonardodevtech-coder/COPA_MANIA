@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Modal, Sta
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from 'expo-router';
 import lendasData from '../../data/lendas.json';
+import { lendasImagens } from '../../lib/lendasImagens';
 import { getUser, desbloquearLenda } from '../../lib/album';
 
 interface Lenda {
@@ -74,7 +75,7 @@ export default function LendasScreen() {
           return (
             <View key={l.id} style={styles.card}>
               {tem ? (
-                <Image source={{ uri: l.foto }} style={styles.foto} resizeMode="cover" />
+                <Image source={lendasImagens[l.id]} style={styles.foto} resizeMode="cover" />
               ) : (
                 <View style={styles.lockArea}>
                   <FontAwesome5 name="user-alt" size={40} color="#33415c" />
