@@ -84,12 +84,7 @@ export default function HomeScreen() {
               </TouchableOpacity>
             </View>
 
-            {/* NOVO CARD: GUIA DA COPA (Ocupa a largura toda) */}
-            <TouchableOpacity 
-              style={styles.fullWidthCard} 
-              activeOpacity={0.8} 
-              onPress={() => router.push('/copa2026' as any)}
-            >
+            <TouchableOpacity style={styles.fullWidthCard} activeOpacity={0.8} onPress={() => router.push('/copa2026' as any)}>
               <View style={[styles.iconBox, { backgroundColor: 'rgba(224, 185, 83, 0.15)', marginBottom: 0, marginRight: 16 }]}>
                 <Ionicons name="map" size={24} color="#E0B953" />
               </View>
@@ -100,11 +95,20 @@ export default function HomeScreen() {
               <Ionicons name="chevron-forward" size={20} color="#E0B953" />
             </TouchableOpacity>
 
+            <TouchableOpacity style={styles.fullWidthCard} activeOpacity={0.8} onPress={() => router.push('/historico' as any)}>
+              <View style={[styles.iconBox, { backgroundColor: 'rgba(17, 139, 68, 0.15)', marginBottom: 0, marginRight: 16 }]}>
+                <Ionicons name="time-outline" size={24} color="#118B44" />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.cardTitle}>Histórico das Copas</Text>
+                <Text style={{ color: '#B0C4DE', fontSize: 12, marginTop: 4 }}>Relembre os campeões e momentos marcantes.</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={20} color="#118B44" />
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>
 
-      {/* MENU LATERAL */}
       <Modal visible={menuAberto} transparent animationType="fade">
         <View style={styles.menuOverlay}>
           <View style={styles.menuLateral}>
@@ -128,27 +132,23 @@ export default function HomeScreen() {
                 <Text style={styles.menuItemText}>Quiz da Copa</Text>
                 <Ionicons name={quizExpandido ? "chevron-up" : "chevron-down"} size={20} color="#E0B953" style={{ marginLeft: 'auto' }} />
               </TouchableOpacity>
-              
               {quizExpandido && temasQuiz.map((tema, index) => (
                 <TouchableOpacity key={index} style={[styles.menuItem, { paddingLeft: 60, paddingVertical: 12 }]} onPress={() => navegarPara('/quiz')}>
                   <Text style={{ color: '#B0C4DE', fontSize: 14 }}>{tema.titulo}</Text>
                 </TouchableOpacity>
               ))}
-
-              {/* ITEM DO GUIA NO MENU LATERAL */}
               <TouchableOpacity style={styles.menuItem} onPress={() => navegarPara('/copa2026')}>
                 <Ionicons name="map" size={24} color="#E0B953" style={styles.menuIcon} />
                 <Text style={styles.menuItemText}>Guia Copa 2026</Text>
               </TouchableOpacity>
-
+              <TouchableOpacity style={styles.menuItem} onPress={() => navegarPara('/historico')}>
+                <Ionicons name="time" size={24} color="#E0B953" style={styles.menuIcon} />
+                <Text style={styles.menuItemText}>Histórico das Copas</Text>
+              </TouchableOpacity>
               <View style={styles.menuDivider} />
               <TouchableOpacity style={styles.menuItem} onPress={() => navegarPara('/sobre')}>
                 <Ionicons name="information-circle" size={24} color="#B0C4DE" style={styles.menuIcon} />
                 <Text style={[styles.menuItemText, { color: '#B0C4DE' }]}>Sobre o Projeto</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.menuItem} onPress={() => navegarPara('/profile')}>
-                <FontAwesome5 name="user-cog" size={18} color="#B0C4DE" style={styles.menuIcon} />
-                <Text style={[styles.menuItemText, { color: '#B0C4DE' }]}>Configurações</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -160,7 +160,7 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  backgroundImage: { flex: 1, resizeMode: 'cover' },
+  backgroundImage: { flex: 1 },
   overlay: { flex: 1, backgroundColor: 'rgba(15, 30, 60, 0.75)' },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 24, paddingTop: 60, paddingBottom: 20 },
   greeting: { color: '#B0C4DE', fontSize: 14, fontWeight: '500', marginBottom: 4 },
