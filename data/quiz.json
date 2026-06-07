@@ -1,0 +1,174 @@
+{
+  "temas": [
+    {
+      "id": "1",
+      "titulo": "Gastronomia",
+      "icon": "food-fork-drink",
+      "iconLib": "mci",
+      "color": "#E0B953",
+      "perguntas": [
+        {
+          "pergunta": "Prato típico da Espanha feito com arroz, açafrão e frutos do mar?",
+          "opcoes": ["Sushi", "Paella", "Tacos", "Feijoada"],
+          "correta": 1
+        },
+        {
+          "pergunta": "O cuscuz é uma iguaria tradicional de qual região?",
+          "opcoes": ["Escandinávia", "Caribe", "Norte da África (Marrocos)", "Japão"],
+          "correta": 2
+        },
+        {
+          "pergunta": "O \"Bacalhau à Brás\" é um prato típico de qual país?",
+          "opcoes": ["Portugal", "Brasil", "França", "Senegal"],
+          "correta": 0
+        },
+        {
+          "pergunta": "O \"thieboudienne\" (arroz com peixe) é o prato nacional de?",
+          "opcoes": ["Escócia", "Iraque", "Espanha", "Senegal"],
+          "correta": 3
+        },
+        {
+          "pergunta": "O \"haggis\" é uma iguaria tradicional de qual país?",
+          "opcoes": ["Cabo Verde", "Escócia", "Haiti", "Uruguai"],
+          "correta": 1
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "titulo": "Pontos Turísticos",
+      "icon": "map-marker-alt",
+      "iconLib": "fa5",
+      "color": "#118B44",
+      "perguntas": [
+        {
+          "pergunta": "A basílica Sagrada Família fica em qual cidade?",
+          "opcoes": ["Lisboa", "Paris", "Barcelona", "Rabat"],
+          "correta": 2
+        },
+        {
+          "pergunta": "A Torre Eiffel é o cartão-postal de qual cidade?",
+          "opcoes": ["Paris", "Madri", "Roma", "Londres"],
+          "correta": 0
+        },
+        {
+          "pergunta": "O Cristo Redentor está localizado em?",
+          "opcoes": ["Brasília", "São Paulo", "Salvador", "Rio de Janeiro"],
+          "correta": 3
+        },
+        {
+          "pergunta": "A cidade de Marrakech, famosa por seus souks, fica em?",
+          "opcoes": ["Senegal", "Marrocos", "Iraque", "Haiti"],
+          "correta": 1
+        },
+        {
+          "pergunta": "O Castelo de Edimburgo é um símbolo de qual país?",
+          "opcoes": ["Espanha", "França", "Escócia", "Portugal"],
+          "correta": 2
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "titulo": "História das Copas",
+      "icon": "history",
+      "iconLib": "fa5",
+      "color": "#B0C4DE",
+      "perguntas": [
+        {
+          "pergunta": "Qual país venceu a primeira Copa do Mundo, em 1930?",
+          "opcoes": ["Uruguai", "Brasil", "Itália", "Argentina"],
+          "correta": 0
+        },
+        {
+          "pergunta": "Quantas Copas do Mundo o Brasil já conquistou?",
+          "opcoes": ["3", "4", "5", "6"],
+          "correta": 2
+        },
+        {
+          "pergunta": "Em qual país foi disputada a Copa do Mundo de 2014?",
+          "opcoes": ["África do Sul", "Brasil", "Rússia", "Alemanha"],
+          "correta": 1
+        },
+        {
+          "pergunta": "A Copa do Mundo de 2026 será sediada por quantos países?",
+          "opcoes": ["1", "2", "3", "4"],
+          "correta": 2
+        },
+        {
+          "pergunta": "Qual seleção venceu a Copa do Mundo de 2010, na África do Sul?",
+          "opcoes": ["Holanda", "Alemanha", "Brasil", "Espanha"],
+          "correta": 3
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "titulo": "Adivinhe o Jogador",
+      "icon": "user-secret",
+      "iconLib": "fa5",
+      "color": "#E0B953",
+      "perguntas": [
+        {
+          "pergunta": "Camisa 7 de Portugal e maior artilheiro da história das seleções?",
+          "opcoes": ["Cristiano Ronaldo", "Lionel Messi", "Neymar", "Mbappé"],
+          "correta": 0
+        },
+        {
+          "pergunta": "Jovem atacante revelação do Barcelona e da Espanha, sobrenome \"Yamal\"?",
+          "opcoes": ["Pedri", "Gavi", "Lamine Yamal", "Ferran Torres"],
+          "correta": 2
+        },
+        {
+          "pergunta": "Zagueiro e capitão do PSG que defende a seleção brasileira?",
+          "opcoes": ["Thiago Silva", "Marquinhos", "Militão", "Bremer"],
+          "correta": 1
+        },
+        {
+          "pergunta": "Astro francês, artilheiro e principal nome do Real Madrid?",
+          "opcoes": ["Griezmann", "Dembélé", "Giroud", "Mbappé"],
+          "correta": 3
+        },
+        {
+          "pergunta": "Lateral-direito do Marrocos, destaque na Copa de 2022, joga no PSG?",
+          "opcoes": ["Hakimi", "Ziyech", "En-Nesyri", "Amrabat"],
+          "correta": 0
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "titulo": "Bandeiras",
+      "icon": "flag",
+      "iconLib": "fa5",
+      "color": "#118B44",
+      "perguntas": [
+        {
+          "pergunta": "Qual bandeira tem um círculo azul com a faixa \"Ordem e Progresso\"?",
+          "opcoes": ["Portugal", "Brasil", "Cabo Verde", "Argentina"],
+          "correta": 1
+        },
+        {
+          "pergunta": "Bandeira vermelha com uma estrela verde de cinco pontas no centro?",
+          "opcoes": ["Senegal", "Espanha", "Marrocos", "Iraque"],
+          "correta": 2
+        },
+        {
+          "pergunta": "Qual bandeira é vermelha e amarela com um brasão à esquerda?",
+          "opcoes": ["Espanha", "Portugal", "França", "Uruguai"],
+          "correta": 0
+        },
+        {
+          "pergunta": "Bandeira com três faixas verticais azul, branca e vermelha?",
+          "opcoes": ["Haiti", "Escócia", "França", "Uruguai"],
+          "correta": 2
+        },
+        {
+          "pergunta": "Bandeira com uma cruz branca em X (Saltire) sobre fundo azul?",
+          "opcoes": ["França", "Escócia", "Cabo Verde", "Senegal"],
+          "correta": 1
+        }
+      ]
+    }
+  ]
+}

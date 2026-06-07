@@ -13,24 +13,30 @@ import {
 import { FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getUser } from '../lib/album';
 
 export default function ProfileScreen() {
   const router = useRouter();
 
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
-  const [telefone, setTelefone] = useState(''); 
+  const [telefone, setTelefone] = useState('');
+  const [medalhas, setMedalhas] = useState(0);
+  const [tacas, setTacas] = useState(0);
+  const [figurinhas, setFigurinhas] = useState(0);
+  const [lendas, setLendas] = useState(0);
 
   useEffect(() => {
     async function loadUserData() {
       try {
-        const userDataString = await AsyncStorage.getItem('@copamania_user');
-        if (userDataString) {
-          const userData = JSON.parse(userDataString);
-          setNome(userData.nome || '');
-          setEmail(userData.email || '');
-          setTelefone(userData.telefone || '');
-        }
+        const userData = await getUser();
+        setNome(userData.nome || '');
+        setEmail(userData.email || '');
+        setTelefone(userData.telefone || '');
+        setMedalhas(userData.medalhas);
+        setTacas(userData.tacas);
+        setFigurinhas(Object.keys(userData.figurinhas).length);
+        setLendas(Object.keys(userData.lendas).filter((k) => userData.lendas[k]).length);
       } catch (error) {
         console.log("Erro ao carregar dados", error);
       }
@@ -96,6 +102,33 @@ export default function ProfileScreen() {
               <Ionicons name="camera" size={16} color="#0F1E3C" />
               <Text style={styles.changePhotoText}>Alterar Foto</Text>
             </TouchableOpacity>
+          </View>
+
+          {/* Conquistas */}
+          <View style={styles.statsCard}>
+            <View style={styles.statItem}>
+              <FontAwesome5 name="medal" size={22} color="#E0B953" />
+              <Text style={styles.statValue}>{medalhas}</Text>
+              <Text style={styles.statLabel}>Medalhas</Text>
+            </View>
+            <View style={styles.statDivider} />
+            <View style={styles.statItem}>
+              <FontAwesome5 name="trophy" size={22} color="#E0B953" />
+              <Text style={styles.statValue}>{tacas}</Text>
+              <Text style={styles.statLabel}>Taças</Text>
+            </View>
+            <View style={styles.statDivider} />
+            <View style={styles.statItem}>
+              <Ionicons name="albums" size={24} color="#E0B953" />
+              <Text style={styles.statValue}>{figurinhas}</Text>
+              <Text style={styles.statLabel}>Figurinhas</Text>
+            </View>
+            <View style={styles.statDivider} />
+            <View style={styles.statItem}>
+              <FontAwesome5 name="star" size={22} color="#E0B953" />
+              <Text style={styles.statValue}>{lendas}</Text>
+              <Text style={styles.statLabel}>Lendas</Text>
+            </View>
           </View>
 
           <View style={styles.formContainer}>
@@ -164,6 +197,11 @@ const styles = StyleSheet.create({
   avatarCircle: { width: 100, height: 100, backgroundColor: '#E0B953', borderRadius: 50, justifyContent: 'center', alignItems: 'center', borderWidth: 4, borderColor: '#1A2235', elevation: 5, shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 5 },
   changePhotoBtn: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#E0B953', paddingHorizontal: 15, paddingVertical: 8, borderRadius: 20, marginTop: -15, borderWidth: 2, borderColor: '#0F1E3C' },
   changePhotoText: { color: '#0F1E3C', fontSize: 12, fontWeight: 'bold', marginLeft: 5 },
+  statsCard: { flexDirection: 'row', backgroundColor: 'rgba(255, 255, 255, 0.05)', borderRadius: 15, paddingVertical: 18, marginBottom: 20, borderWidth: 1, borderColor: 'rgba(224, 185, 83, 0.2)', alignItems: 'center' },
+  statItem: { flex: 1, alignItems: 'center' },
+  statValue: { color: '#FFF', fontSize: 20, fontWeight: '900', marginTop: 6 },
+  statLabel: { color: '#8FA3C0', fontSize: 11, marginTop: 2 },
+  statDivider: { width: 1, height: 40, backgroundColor: 'rgba(255,255,255,0.1)' },
   formContainer: { backgroundColor: 'rgba(255, 255, 255, 0.05)', padding: 20, borderRadius: 15, borderWidth: 1, borderColor: 'rgba(224, 185, 83, 0.2)' },
   sectionTitle: { fontSize: 18, fontWeight: 'bold', color: '#FFF', marginBottom: 20, borderBottomWidth: 1, borderBottomColor: 'rgba(255,255,255,0.1)', paddingBottom: 10 },
   label: { color: '#B0C4DE', fontSize: 12, fontWeight: 'bold', marginBottom: 8, marginTop: 15 },

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ImageBackground, Image, StatusBar } from 'react-native';
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import { useRouter, Stack } from 'expo-router';
-import data from '../data/info_copa2026.json';
+import data from '../../data/info_copa2026.json';
 
 export default function CopaInfoScreen() {
   const router = useRouter();
@@ -38,7 +38,7 @@ export default function CopaInfoScreen() {
 
   return (
     <ImageBackground 
-      source={require('../assets/images/background.jpg')} 
+      source={require('../../assets/images/background.jpg')}
       style={styles.container} 
       blurRadius={12}
     >

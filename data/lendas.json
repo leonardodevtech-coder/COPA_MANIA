@@ -1,0 +1,100 @@
+{
+  "lendas": [
+    {
+      "id": "pele",
+      "nome": "Pelé",
+      "pais": "Brasil",
+      "posicao": "Atacante",
+      "foto": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Pele_con_brasil_%28cropped%29.jpg",
+      "descricao": "O Rei do Futebol. Tricampeão mundial (1958, 1962, 1970), maior símbolo da seleção brasileira."
+    },
+    {
+      "id": "maradona",
+      "nome": "Diego Maradona",
+      "pais": "Argentina",
+      "posicao": "Meia-atacante",
+      "foto": "https://upload.wikimedia.org/wikipedia/commons/4/48/Argentina_celebrando_copa_%28cropped%29.jpg",
+      "descricao": "Gênio argentino, campeão do mundo em 1986 e autor do famoso \"Gol do Século\"."
+    },
+    {
+      "id": "zidane",
+      "nome": "Zinedine Zidane",
+      "pais": "França",
+      "posicao": "Meio-campo",
+      "foto": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_03.jpg",
+      "descricao": "Maestro francês, campeão mundial em 1998 e um dos maiores meias da história."
+    },
+    {
+      "id": "cruyff",
+      "nome": "Johan Cruyff",
+      "pais": "Holanda",
+      "posicao": "Atacante",
+      "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Johan_Cruijff_%281974%29.jpg/500px-Johan_Cruijff_%281974%29.jpg",
+      "descricao": "Ícone do \"Carrossel Holandês\" e do Futebol Total, revolucionou o esporte."
+    },
+    {
+      "id": "roberto-carlos",
+      "nome": "Roberto Carlos",
+      "pais": "Brasil",
+      "posicao": "Lateral-esquerdo",
+      "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/LS3_1288_%2853332367864%29_%28cropped%29.jpg/500px-LS3_1288_%2853332367864%29_%28cropped%29.jpg",
+      "descricao": "Lateral brasileiro de chute potente, pentacampeão mundial em 2002."
+    },
+    {
+      "id": "ronaldo",
+      "nome": "Ronaldo Nazário",
+      "pais": "Brasil",
+      "posicao": "Atacante",
+      "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Ronaldo_Lu%C3%ADs_Naz%C3%A1rio_de_Lima_2019_%283x4_cropped%29.jpg/500px-Ronaldo_Lu%C3%ADs_Naz%C3%A1rio_de_Lima_2019_%283x4_cropped%29.jpg",
+      "descricao": "O Fenômeno. Artilheiro implacável, campeão do mundo em 1994 e 2002."
+    },
+    {
+      "id": "ronaldinho",
+      "nome": "Ronaldinho",
+      "pais": "Brasil",
+      "posicao": "Meia-atacante",
+      "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Ronaldinho_in_2019.jpg/500px-Ronaldinho_in_2019.jpg",
+      "descricao": "Mago do drible e da alegria, campeão mundial em 2002 e melhor do mundo."
+    },
+    {
+      "id": "beckenbauer",
+      "nome": "Franz Beckenbauer",
+      "pais": "Alemanha",
+      "posicao": "Zagueiro",
+      "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Franz_Beckenbauer_%281975%29.jpg/500px-Franz_Beckenbauer_%281975%29.jpg",
+      "descricao": "O Kaiser. Lenda alemã, campeão do mundo como jogador (1974) e técnico (1990)."
+    },
+    {
+      "id": "garrincha",
+      "nome": "Garrincha",
+      "pais": "Brasil",
+      "posicao": "Ponta-direita",
+      "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Manoel_Francisco_dos_Santos-Garrincha.jpg/500px-Manoel_Francisco_dos_Santos-Garrincha.jpg",
+      "descricao": "A Alegria do Povo. Driblador genial, bicampeão mundial em 1958 e 1962."
+    },
+    {
+      "id": "maldini",
+      "nome": "Paolo Maldini",
+      "pais": "Itália",
+      "posicao": "Zagueiro",
+      "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Paolo_Maldini_AC_Milan_Technical_director_2018.jpg/500px-Paolo_Maldini_AC_Milan_Technical_director_2018.jpg",
+      "descricao": "Símbolo de elegância e longevidade na defesa, eterno capitão do Milan e da Itália."
+    },
+    {
+      "id": "romario",
+      "nome": "Romário",
+      "pais": "Brasil",
+      "posicao": "Atacante",
+      "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Senadores_da_57%C2%AA_Legislatura_%2852689451805%29.jpg/500px-Senadores_da_57%C2%AA_Legislatura_%2852689451805%29.jpg",
+      "descricao": "Baixinho genial na área, artilheiro e craque do tetra mundial em 1994."
+    },
+    {
+      "id": "zico",
+      "nome": "Zico",
+      "pais": "Brasil",
+      "posicao": "Meia",
+      "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Zico_2012_3.jpg/500px-Zico_2012_3.jpg",
+      "descricao": "O Galinho de Quintino, um dos maiores meias e cobradores de falta da história."
+    }
+  ]
+}

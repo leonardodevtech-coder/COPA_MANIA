@@ -40,6 +40,13 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="lendas"
+        options={{
+          title: 'Lendas',
+          tabBarIcon: ({ color }) => <Ionicons name="trophy" size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
   name="copa2026"
   options={{
     title: 'Copa 2026',

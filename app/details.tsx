@@ -119,10 +119,10 @@ export default function DetailsScreen() {
             <Text style={[styles.cardTitle, { color: principal }]}>Craques Destaque</Text>
           </View>
           <View style={styles.playersContainer}>
-            {selecao.jogadores.map((jogador: string, index: number) => (
+            {selecao.jogadores.map((jogador: { nome: string }, index: number) => (
               <View key={index} style={[styles.playerTag, { backgroundColor: principal }]}>
                 <Ionicons name="star" size={12} color={secundaria} style={{marginRight: 5}} />
-                <Text style={[styles.playerText, { color: texto }]}>{jogador}</Text>
+                <Text style={[styles.playerText, { color: texto }]}>{jogador.nome}</Text>
               </View>
             ))}
           </View>
