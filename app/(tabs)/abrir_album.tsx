@@ -1,9 +1,9 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { ScrollView, Dimensions, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { ScrollView, Dimensions, View, Text, StyleSheet, TouchableOpacity, Modal, Image } from 'react-native';
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { useFocusEffect, useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
-import AlbumPage from '../../components/AlbumPage';
+import AlbumPage, { type Jogador } from '../../components/AlbumPage';
 import { getUser, setFotoJogador, todosOsSlots, type Figurinha } from '../../lib/album';
 
 const { width } = Dimensions.get('window');
@@ -16,6 +16,7 @@ export default function AbrirAlbumScreen() {
   const [index, setIndex] = useState(0);
   const [figurinhas, setFigurinhas] = useState<Record<string, Figurinha>>({});
   const [medalhas, setMedalhas] = useState(0);
+  const [selecionado, setSelecionado] = useState<{ key: string; jogador: Jogador } | null>(null);
 
   const recarregar = useCallback(() => {
     getUser().then((u) => {
@@ -86,7 +87,7 @@ export default function AbrirAlbumScreen() {
               <AlbumPage
                 selecao={item}
                 figurinhas={figurinhas}
-                onSlotPress={(key) => escolherFoto(key)}
+                onSlotPress={(key, jogador) => setSelecionado({ key, jogador })}
               />
             </View>
           ))}
@@ -104,6 +105,69 @@ export default function AbrirAlbumScreen() {
           </TouchableOpacity>
         )}
       </View>
+
+      {/* Detalhes do jogador (posição, altura, peso) + foto */}
+      <Modal
+        visible={!!selecionado}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setSelecionado(null)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.detalheCard}>
+            <TouchableOpacity style={styles.fecharBtn} onPress={() => setSelecionado(null)}>
+              <Ionicons name="close" size={26} color="#8FA3C0" />
+            </TouchableOpacity>
+
+            {selecionado && (() => {
+              const fotoUri = figurinhas[selecionado.key]?.fotoUri;
+              const j = selecionado.jogador;
+              return (
+                <>
+                  <View style={styles.detalheFotoWrap}>
+                    {fotoUri ? (
+                      <Image source={{ uri: fotoUri }} style={styles.detalheFoto} resizeMode="cover" />
+                    ) : (
+                      <FontAwesome5 name="user-alt" size={48} color="#33415c" />
+                    )}
+                  </View>
+
+                  <Text style={styles.detalheNome}>{j.nome}</Text>
+
+                  <View style={styles.detalheStats}>
+                    <View style={styles.detalheStat}>
+                      <FontAwesome5 name="running" size={15} color="#E0B953" />
+                      <Text style={styles.detalheValor}>{j.posicao || '—'}</Text>
+                      <Text style={styles.detalheLabel}>Posição</Text>
+                    </View>
+                    <View style={styles.detalheDivider} />
+                    <View style={styles.detalheStat}>
+                      <FontAwesome5 name="ruler-vertical" size={15} color="#E0B953" />
+                      <Text style={styles.detalheValor}>{j.altura || '—'}</Text>
+                      <Text style={styles.detalheLabel}>Altura</Text>
+                    </View>
+                    <View style={styles.detalheDivider} />
+                    <View style={styles.detalheStat}>
+                      <FontAwesome5 name="weight-hanging" size={15} color="#E0B953" />
+                      <Text style={styles.detalheValor}>{j.peso || '—'}</Text>
+                      <Text style={styles.detalheLabel}>Peso</Text>
+                    </View>
+                  </View>
+
+                  <TouchableOpacity
+                    style={styles.fotoBtn}
+                    onPress={() => escolherFoto(selecionado.key)}
+                    activeOpacity={0.9}
+                  >
+                    <Ionicons name="camera" size={18} color="#0B101E" />
+                    <Text style={styles.fotoBtnText}>{fotoUri ? 'Trocar foto' : 'Adicionar foto'}</Text>
+                  </TouchableOpacity>
+                </>
+              );
+            })()}
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -121,4 +185,18 @@ const styles = StyleSheet.create({
   arrow: { position: 'absolute', top: '50%', padding: 10, backgroundColor: 'rgba(0,0,0,0.35)', borderRadius: 25 },
   leftArrow: { left: 10 },
   rightArrow: { right: 10 },
+
+  modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.75)', justifyContent: 'center', alignItems: 'center', padding: 24 },
+  detalheCard: { backgroundColor: '#1A2235', borderRadius: 24, padding: 24, width: '100%', maxWidth: 360, alignItems: 'center', borderWidth: 1, borderColor: 'rgba(224, 185, 83, 0.3)' },
+  fecharBtn: { position: 'absolute', top: 14, right: 14, zIndex: 2, padding: 4 },
+  detalheFotoWrap: { width: 120, height: 120, borderRadius: 60, backgroundColor: '#222e47', justifyContent: 'center', alignItems: 'center', borderWidth: 3, borderColor: '#E0B953', overflow: 'hidden', marginTop: 6, marginBottom: 14 },
+  detalheFoto: { width: '100%', height: '100%' },
+  detalheNome: { color: '#FFF', fontSize: 22, fontWeight: '900', textAlign: 'center', marginBottom: 18 },
+  detalheStats: { flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: 16, paddingVertical: 16, width: '100%' },
+  detalheStat: { flex: 1, alignItems: 'center', paddingHorizontal: 4 },
+  detalheValor: { color: '#FFF', fontSize: 14, fontWeight: 'bold', marginTop: 7, textAlign: 'center' },
+  detalheLabel: { color: '#8FA3C0', fontSize: 10, marginTop: 2, textTransform: 'uppercase' },
+  detalheDivider: { width: 1, height: 40, backgroundColor: 'rgba(255,255,255,0.1)' },
+  fotoBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10, backgroundColor: '#E0B953', borderRadius: 16, paddingVertical: 15, width: '100%', marginTop: 20 },
+  fotoBtnText: { color: '#0B101E', fontWeight: '900', fontSize: 15 },
 });

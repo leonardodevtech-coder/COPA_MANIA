@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar, ImageBackground, Modal, Alert } from 'react-native'; // Importei Alert
+import React, { useState, useCallback } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar, ImageBackground, Modal, Image, Alert } from 'react-native'; // Importei Alert
 import { FontAwesome5, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
+import { getUser } from '../../lib/album';
 
 export default function HomeScreen() {
   const router = useRouter();
-  
+
   const [menuAberto, setMenuAberto] = useState(false);
   const [quizExpandido, setQuizExpandido] = useState(false);
+  const [avatarUri, setAvatarUri] = useState<string | null>(null);
+
+  useFocusEffect(
+    useCallback(() => {
+      getUser().then((u) => setAvatarUri(u.avatarUri || null));
+    }, [])
+  );
 
   const temasQuiz = [
     { titulo: 'Gastronomia' },
@@ -55,7 +63,11 @@ export default function HomeScreen() {
             </View>
           </View>
           <TouchableOpacity style={styles.avatarContainer} onPress={() => router.push('/profile' as any)}>
-            <FontAwesome5 name="user-alt" size={18} color="#0B101E" />
+            {avatarUri ? (
+              <Image source={{ uri: avatarUri }} style={styles.avatarImg} />
+            ) : (
+              <FontAwesome5 name="user-alt" size={18} color="#0B101E" />
+            )}
           </TouchableOpacity>
         </View>
 
@@ -183,7 +195,8 @@ const styles = StyleSheet.create({
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 24, paddingTop: 60, paddingBottom: 20 },
   greeting: { color: '#B0C4DE', fontSize: 14, fontWeight: '500', marginBottom: 4 },
   headerTitle: { color: '#E0B953', fontSize: 22, fontWeight: '900', letterSpacing: 1 },
-  avatarContainer: { width: 45, height: 45, backgroundColor: '#E0B953', borderRadius: 25, justifyContent: 'center', alignItems: 'center', borderWidth: 2, borderColor: '#1A2235' },
+  avatarContainer: { width: 45, height: 45, backgroundColor: '#E0B953', borderRadius: 25, justifyContent: 'center', alignItems: 'center', borderWidth: 2, borderColor: '#1A2235', overflow: 'hidden' },
+  avatarImg: { width: '100%', height: '100%' },
   scrollContent: { paddingBottom: 40 },
   sectionContainer: { marginBottom: 24, paddingHorizontal: 24 },
   sectionHeaderTitle: { color: '#FFFFFF', fontSize: 18, fontWeight: '700', marginBottom: 16, letterSpacing: 0.5 },

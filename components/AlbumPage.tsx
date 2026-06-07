@@ -4,8 +4,11 @@ import { useRouter } from 'expo-router';
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import type { Figurinha } from '../lib/album';
 
-interface Jogador {
+export interface Jogador {
   nome: string;
+  posicao?: string;
+  altura?: string;
+  peso?: string;
 }
 
 interface SelecaoProps {
@@ -17,7 +20,7 @@ interface SelecaoProps {
     jogadores: Jogador[];
   };
   figurinhas: Record<string, Figurinha>;
-  onSlotPress: (key: string, nome: string) => void;
+  onSlotPress: (key: string, jogador: Jogador) => void;
 }
 
 function Slot({
@@ -26,6 +29,9 @@ function Slot({
   fig,
   principal,
   texto,
+  posicao,
+  altura,
+  peso,
   onPress,
 }: {
   nome: string;
@@ -33,6 +39,9 @@ function Slot({
   fig?: Figurinha;
   principal: string;
   texto: string;
+  posicao?: string;
+  altura?: string;
+  peso?: string;
   onPress: () => void;
 }) {
   const desbloqueada = !!fig;
@@ -72,11 +81,21 @@ function Slot({
         <Text style={[styles.stickerNumber, { color: texto }]}>{numero}</Text>
       </View>
 
-      {/* Nome (oculto enquanto bloqueada) */}
+      {/* Nome + atributos (ocultos enquanto bloqueada) */}
       <View style={styles.nameBar}>
-        <Text style={styles.playerName} numberOfLines={2}>
+        <Text style={styles.playerName} numberOfLines={1}>
           {desbloqueada ? nome : '???'}
         </Text>
+        {desbloqueada && (
+          <>
+            {!!posicao && <Text style={styles.playerPos} numberOfLines={1}>{posicao}</Text>}
+            {(!!altura || !!peso) && (
+              <Text style={styles.playerStats} numberOfLines={1}>
+                {[altura, peso].filter(Boolean).join(' · ')}
+              </Text>
+            )}
+          </>
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -124,7 +143,10 @@ export default function AlbumPage({ selecao, figurinhas, onSlotPress }: SelecaoP
                 fig={figurinhas[key]}
                 principal={principal}
                 texto={texto}
-                onPress={() => onSlotPress(key, jogador.nome)}
+                posicao={jogador.posicao}
+                altura={jogador.altura}
+                peso={jogador.peso}
+                onPress={() => onSlotPress(key, jogador)}
               />
             );
           })}
@@ -174,6 +196,8 @@ const styles = StyleSheet.create({
 
   stickerNumberBox: { position: 'absolute', top: 5, left: 5, width: 22, height: 22, borderRadius: 11, justifyContent: 'center', alignItems: 'center', zIndex: 2 },
   stickerNumber: { fontSize: 10, fontWeight: 'bold' },
-  nameBar: { width: '100%', backgroundColor: 'rgba(0,0,0,0.55)', paddingVertical: 4, paddingHorizontal: 3 },
-  playerName: { fontSize: 11, fontWeight: 'bold', color: '#fff', textAlign: 'center' }
+  nameBar: { width: '100%', backgroundColor: 'rgba(0,0,0,0.65)', paddingVertical: 5, paddingHorizontal: 3 },
+  playerName: { fontSize: 11, fontWeight: 'bold', color: '#fff', textAlign: 'center' },
+  playerPos: { fontSize: 9, fontWeight: '700', color: '#E0B953', textAlign: 'center', marginTop: 2, textTransform: 'uppercase' },
+  playerStats: { fontSize: 9, color: '#D7E3F4', textAlign: 'center', marginTop: 1 }
 });

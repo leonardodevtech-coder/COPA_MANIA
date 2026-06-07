@@ -14,6 +14,7 @@ export interface AlbumUser {
   email?: string;
   telefone?: string;
   senha?: string;
+  avatarUri?: string | null; // foto de perfil (data-URI base64 ou uri local)
   medalhas: number;
   tacas: number;
   figurinhas: Record<string, Figurinha>; // chave = "selecaoId:index"
@@ -95,6 +96,14 @@ export async function abrirPacote(): Promise<{ ok: boolean; jogador?: Slot; moti
 export async function setFotoJogador(key: string, fotoUri: string): Promise<AlbumUser> {
   const u = await getUser();
   u.figurinhas[key] = { fotoUri };
+  await save(u);
+  return u;
+}
+
+// Define (ou troca) a foto de perfil do usuário.
+export async function setFotoPerfil(avatarUri: string): Promise<AlbumUser> {
+  const u = await getUser();
+  u.avatarUri = avatarUri;
   await save(u);
   return u;
 }

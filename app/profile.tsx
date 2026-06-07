@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  View, 
-  Text, 
-  TextInput, 
-  TouchableOpacity, 
-  StyleSheet, 
-  KeyboardAvoidingView, 
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Image,
   Alert
 } from 'react-native';
 import { FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getUser } from '../lib/album';
+import { getUser, setFotoPerfil } from '../lib/album';
 
 export default function ProfileScreen() {
   const router = useRouter();
@@ -21,6 +23,7 @@ export default function ProfileScreen() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
+  const [avatarUri, setAvatarUri] = useState<string | null>(null);
   const [medalhas, setMedalhas] = useState(0);
   const [tacas, setTacas] = useState(0);
   const [figurinhas, setFigurinhas] = useState(0);
@@ -33,6 +36,7 @@ export default function ProfileScreen() {
         setNome(userData.nome || '');
         setEmail(userData.email || '');
         setTelefone(userData.telefone || '');
+        setAvatarUri(userData.avatarUri || null);
         setMedalhas(userData.medalhas);
         setTacas(userData.tacas);
         setFigurinhas(Object.keys(userData.figurinhas).length);
@@ -75,8 +79,23 @@ export default function ProfileScreen() {
     );
   }
 
-  function handleChangePhoto() {
-    Alert.alert('Foto de Perfil', 'A funcionalidade de galeria/câmera será conectada em breve!');
+  async function handleChangePhoto() {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ['images'],
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 0.5,
+        base64: true,
+      });
+      if (result.canceled) return;
+      const asset = result.assets[0];
+      const uri = asset.base64 ? `data:image/jpeg;base64,${asset.base64}` : asset.uri;
+      setAvatarUri(uri);
+      await setFotoPerfil(uri);
+    } catch {
+      Alert.alert('Erro', 'Não foi possível carregar a foto. Tente novamente.');
+    }
   }
 
   return (
@@ -95,12 +114,16 @@ export default function ProfileScreen() {
       >
         <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
           <View style={styles.avatarSection}>
-            <View style={styles.avatarCircle}>
-              <FontAwesome5 name="user-alt" size={40} color="#0B101E" />
-            </View>
+            <TouchableOpacity style={styles.avatarCircle} onPress={handleChangePhoto} activeOpacity={0.85}>
+              {avatarUri ? (
+                <Image source={{ uri: avatarUri }} style={styles.avatarImg} />
+              ) : (
+                <FontAwesome5 name="user-alt" size={40} color="#0B101E" />
+              )}
+            </TouchableOpacity>
             <TouchableOpacity style={styles.changePhotoBtn} onPress={handleChangePhoto}>
               <Ionicons name="camera" size={16} color="#0F1E3C" />
-              <Text style={styles.changePhotoText}>Alterar Foto</Text>
+              <Text style={styles.changePhotoText}>{avatarUri ? 'Trocar Foto' : 'Alterar Foto'}</Text>
             </TouchableOpacity>
           </View>
 
@@ -194,7 +217,8 @@ const styles = StyleSheet.create({
   headerTitle: { fontSize: 20, fontWeight: 'bold', color: '#E0B953' },
   scrollContent: { padding: 20, paddingBottom: 40 },
   avatarSection: { alignItems: 'center', marginBottom: 30, marginTop: 10 },
-  avatarCircle: { width: 100, height: 100, backgroundColor: '#E0B953', borderRadius: 50, justifyContent: 'center', alignItems: 'center', borderWidth: 4, borderColor: '#1A2235', elevation: 5, shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 5 },
+  avatarCircle: { width: 100, height: 100, backgroundColor: '#E0B953', borderRadius: 50, justifyContent: 'center', alignItems: 'center', borderWidth: 4, borderColor: '#1A2235', overflow: 'hidden', elevation: 5, shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 5 },
+  avatarImg: { width: '100%', height: '100%' },
   changePhotoBtn: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#E0B953', paddingHorizontal: 15, paddingVertical: 8, borderRadius: 20, marginTop: -15, borderWidth: 2, borderColor: '#0F1E3C' },
   changePhotoText: { color: '#0F1E3C', fontSize: 12, fontWeight: 'bold', marginLeft: 5 },
   statsCard: { flexDirection: 'row', backgroundColor: 'rgba(255, 255, 255, 0.05)', borderRadius: 15, paddingVertical: 18, marginBottom: 20, borderWidth: 1, borderColor: 'rgba(224, 185, 83, 0.2)', alignItems: 'center' },
