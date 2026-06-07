@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
@@ -84,24 +84,27 @@ function Slot({
 
 export default function AlbumPage({ selecao, figurinhas, onSlotPress }: SelecaoProps) {
   const router = useRouter();
-  const { principal, secundaria, texto } = selecao.cores;
+  const { principal, texto } = selecao.cores;
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      {/* CABEÇALHO DA PÁGINA COM AS CORES DA SELEÇÃO */}
+      {/* CABEÇALHO DA PÁGINA */}
       <View style={[styles.headerBanner, { backgroundColor: principal }]}>
         <Text style={[styles.headerTitle, { color: texto }]}>{selecao.nome}</Text>
 
-        <View style={styles.headerInfo}>
+        {/* LINHA DO HEADER (GRUPO + BOTÃO HISTÓRIA) */}
+        <View style={styles.headerRow}>
           <View style={[styles.badge, { backgroundColor: texto }]}>
             <Text style={[styles.badgeText, { color: principal }]}>Grupo {selecao.grupo}</Text>
           </View>
 
+          {/* Botão História estilizado (pill) — usa router.push (sem Link asChild) */}
           <TouchableOpacity
-            style={[styles.detailsBtn, { backgroundColor: secundaria }]}
+            style={[styles.historyButton, { borderColor: texto }]}
             onPress={() => router.push({ pathname: '/details', params: { id: selecao.id } })}
           >
-            <Text style={styles.detailsBtnText}>História da Seleção</Text>
+            <Ionicons name="book-outline" size={14} color={texto} />
+            <Text style={[styles.historyButtonText, { color: texto }]}>História</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -136,11 +139,15 @@ const styles = StyleSheet.create({
 
   headerBanner: { padding: 25, borderBottomWidth: 5, borderBottomColor: 'rgba(0,0,0,0.1)' },
   headerTitle: { fontSize: 32, fontWeight: '900', textTransform: 'uppercase', letterSpacing: 2, textAlign: 'center', marginBottom: 15 },
-  headerInfo: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+
+  // Alinhamento do Grupo e Botão
+  headerRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   badge: { paddingHorizontal: 12, paddingVertical: 6, borderRadius: 8 },
   badgeText: { fontSize: 14, fontWeight: 'bold', textTransform: 'uppercase' },
-  detailsBtn: { paddingHorizontal: 15, paddingVertical: 8, borderRadius: 8, elevation: 2 },
-  detailsBtnText: { fontSize: 13, fontWeight: 'bold', color: '#111' },
+
+  // Botão História "Pill"
+  historyButton: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 12, paddingVertical: 6, borderRadius: 20, borderWidth: 1 },
+  historyButtonText: { fontSize: 13, fontWeight: 'bold' },
 
   albumArea: { padding: 20 },
   sectionTitle: { fontSize: 20, fontWeight: 'bold', marginBottom: 20, textAlign: 'center', textTransform: 'uppercase' },

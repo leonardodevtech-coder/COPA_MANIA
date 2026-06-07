@@ -1,0 +1,36 @@
+{
+  "historico": [
+    {
+      "ano": 2022,
+      "sede": "Catar",
+      "campeao": "Argentina",
+      "vice": "França",
+      "artilheiro": "Kylian Mbappé (8 gols)",
+      "destaque": "Primeira Copa realizada no Oriente Médio e a consagração definitiva de Lionel Messi."
+    },
+    {
+      "ano": 2018,
+      "sede": "Rússia",
+      "campeao": "França",
+      "vice": "Croácia",
+      "artilheiro": "Harry Kane (6 gols)",
+      "destaque": "O surgimento de Kylian Mbappé como estrela global e a final histórica da Croácia."
+    },
+    {
+      "ano": 2014,
+      "sede": "Brasil",
+      "campeao": "Alemanha",
+      "vice": "Argentina",
+      "artilheiro": "James Rodríguez (6 gols)",
+      "destaque": "O fatídico 7x1 na semifinal entre Brasil e Alemanha, e o gol de Götze na prorrogação da final."
+    },
+    {
+      "ano": 2010,
+      "sede": "África do Sul",
+      "campeao": "Espanha",
+      "vice": "Holanda",
+      "artilheiro": "Thomas Müller, David Villa, Wesley Sneijder, Diego Forlán (5 gols)",
+      "destaque": "Primeira Copa no continente africano e o primeiro título mundial da Espanha com seu famoso 'tiki-taka'."
+    }
+  ]
+}

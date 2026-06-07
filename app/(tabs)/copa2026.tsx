@@ -6,8 +6,6 @@ import data from '../../data/info_copa2026.json';
 
 export default function CopaInfoScreen() {
   const router = useRouter();
-  
-  // ESTADO PARA CONTROLAR OS PONTINHOS DO CARROSSEL
   const [activeIndex, setActiveIndex] = useState(0);
 
   const curiosidades = [
@@ -28,10 +26,8 @@ export default function CopaInfoScreen() {
     }
   ];
 
-  // FUNÇÃO QUE CALCULA QUAL CARTÃO ESTÁ NA TELA
   const handleScroll = (event: any) => {
     const scrollPosition = event.nativeEvent.contentOffset.x;
-    // 306 é a largura do cartão (290) + a margem (16)
     const index = Math.round(scrollPosition / 306);
     setActiveIndex(index);
   };
@@ -47,7 +43,7 @@ export default function CopaInfoScreen() {
         <Stack.Screen options={{ headerShown: false, title: '' }} />
 
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+          <TouchableOpacity onPress={() => router.navigate('/home')} style={styles.backButton}>
             <Ionicons name="arrow-back" size={28} color="#FFF" />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Guia Copa 2026</Text>
@@ -63,10 +59,10 @@ export default function CopaInfoScreen() {
               showsHorizontalScrollIndicator={false} 
               style={{ marginBottom: 15 }}
               pagingEnabled 
-              snapToInterval={306} // Largura exata para o snap (290 + 16)
+              snapToInterval={306}
               decelerationRate="fast"
-              onScroll={handleScroll} // Liga o evento de rolagem
-              scrollEventThrottle={16} // Deixa a animação suave
+              onScroll={handleScroll}
+              scrollEventThrottle={16}
             >
               {curiosidades.map((item, i) => (
                 <View key={i} style={styles.noticiaCard}>
@@ -80,8 +76,6 @@ export default function CopaInfoScreen() {
                 </View>
               ))}
             </ScrollView>
-            
-            {/* OS PONTINHOS AGORA REAGEM AO ESTADO 'activeIndex' */}
             <View style={styles.paginationDots}>
               {curiosidades.map((_, i) => (
                 <View key={i} style={[styles.dot, activeIndex === i ? styles.activeDot : null]} />
@@ -89,7 +83,6 @@ export default function CopaInfoScreen() {
             </View>
           </View>
 
-          {/* SEÇÃO: BOLA OFICIAL */}
           <Text style={styles.sectionTitle}>Bola Oficial</Text>
           <View style={styles.bolaCard}>
             <Image source={{ uri: data.bolaOficial.imagem }} style={styles.bolaImagem} />
@@ -99,7 +92,6 @@ export default function CopaInfoScreen() {
             </View>
           </View>
 
-          {/* SEÇÃO: PAÍSES-SEDE */}
           <Text style={styles.sectionTitle}>Países-Sede</Text>
           <View style={styles.sedesContainer}>
             {data.paisesSede.map((sede, i) => (
@@ -110,7 +102,6 @@ export default function CopaInfoScreen() {
             ))}
           </View>
 
-          {/* SEÇÃO: MASCOTES */}
           <Text style={styles.sectionTitle}>Mascotes Oficiais</Text>
           <View style={styles.mascotesContainer}>
             {data.mascotes.map((mascote, i) => (
@@ -121,35 +112,39 @@ export default function CopaInfoScreen() {
               </View>
             ))}
           </View>
-{/* SEÇÃO: ESTÁDIOS */}
-    <Text style={styles.sectionTitle}>Estádios Presentes na Copa</Text>
-{data.estadios.map((estadio, i) => (
-  <View key={i} style={styles.estadioCard}>
-    <Image 
-      source={{ uri: `https://wsrv.nl/?url=${encodeURIComponent(estadio.imagem)}` }} 
-      style={styles.estadioImagem}
-    />
-    <View style={styles.estadioInfo}>
-      <Text style={styles.estadioNome}>{estadio.nome}</Text>
-      <View style={styles.locRow}>
-        <Ionicons name="location" size={14} color="#E0B953" style={{ marginRight: 4 }} />
-        <Text style={styles.estadioLocal}>{estadio.cidade}</Text>
-      </View>
-      <View style={[styles.locRow, { marginTop: 4 }]}>
-        <Ionicons name="people" size={14} color="#E0B953" style={{ marginRight: 4 }} />
-        <Text style={styles.estadioLocal}>{estadio.capacidade} | Fundado em {estadio.fundacao}</Text>
-      </View>
-    </View>
-  </View>
-))}
 
-          {/* SEÇÃO: PARTICIPANTES E DIVISÕES AGRUPADAS */}
+          {/* SEÇÃO: ESTÁDIOS COM CAPACIDADE E FUNDAÇÃO */}
+          <Text style={styles.sectionTitle}>Estádios Presentes na Copa</Text>
+          {data.estadios.map((estadio, i) => (
+            <View key={i} style={styles.estadioCard}>
+              <Image 
+                source={{ uri: estadio.imagem }} 
+                style={styles.estadioImagem}
+              />
+              <View style={styles.estadioInfo}>
+                <Text style={styles.estadioNome}>{estadio.nome}</Text>
+                
+                {/* Linha da Cidade */}
+                <View style={styles.locRow}>
+                  <Ionicons name="location" size={14} color="#E0B953" style={{ marginRight: 4 }} />
+                  <Text style={styles.estadioLocal}>{estadio.cidade}</Text>
+                </View>
+                
+                {/* Linha Capacidade e Fundação */}
+                <View style={[styles.locRow, { marginTop: 4 }]}>
+                  <Ionicons name="people" size={14} color="#E0B953" style={{ marginRight: 4 }} />
+                  <Text style={styles.estadioLocal}>
+                    {estadio.capacidade} lugares | Fundado em {estadio.fundacao}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          ))}
+
           <Text style={styles.sectionTitle}>Seleções Participantes</Text>
-          
           {data.divisoes.map((divisao, idx) => (
             <View key={idx} style={styles.divisaoContainer}>
               <Text style={styles.divisaoHeader}>{divisao.nome}</Text>
-              
               <View style={styles.participantesGrid}>
                 {divisao.selecoes.map((pais, i) => (
                   <View key={i} style={styles.selecaoCard}>
@@ -182,7 +177,7 @@ const styles = StyleSheet.create({
   noticiaSnippet: { color: '#FFFFFF', fontSize: 15, lineHeight: 22 },
   paginationDots: { flexDirection: 'row', justifyContent: 'center', marginTop: 10 },
   dot: { width: 8, height: 8, borderRadius: 4, backgroundColor: 'rgba(255, 255, 255, 0.3)', marginHorizontal: 4 },
-  activeDot: { backgroundColor: '#118B44', width: 16 }, // Deixei o pontinho ativo um pouco mais largo para ficar mais legal!
+  activeDot: { backgroundColor: '#118B44', width: 16 },
 
   bolaCard: { backgroundColor: 'rgba(25, 45, 80, 0.8)', borderRadius: 16, padding: 16, flexDirection: 'row', alignItems: 'center', borderWidth: 1.5, borderColor: '#118B44' },
   bolaImagem: { width: 80, height: 80, borderRadius: 40, resizeMode: 'contain' },
@@ -201,13 +196,13 @@ const styles = StyleSheet.create({
   mascoteNome: { color: '#FFF', fontSize: 13, fontWeight: 'bold', textAlign: 'center' },
   mascoteSub: { color: '#B0C4DE', fontSize: 10, textAlign: 'center', marginTop: 2 },
 
- estadioCard: { 
+  estadioCard: { 
     backgroundColor: 'rgba(25, 45, 80, 0.8)', 
     borderRadius: 12, 
     marginBottom: 14, 
     borderWidth: 1.5, 
     borderColor: '#118B44',
-    overflow: 'hidden', // IMPORTANTÍSSIMO para arredondar a imagem
+    overflow: 'hidden', 
   },
   estadioImagem: { 
     width: '100%', 
