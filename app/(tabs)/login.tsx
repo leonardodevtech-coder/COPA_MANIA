@@ -1,6 +1,7 @@
 import { FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
+import { useAcessibilidade } from '../../lib/acessibilidade';
 import React, { useState } from 'react';
 import {
     Alert,
@@ -18,8 +19,9 @@ import {
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  
+
   const router = useRouter(); // Ferramenta de navegação
+  const { altoContraste: hc } = useAcessibilidade();
 
   // Função atualizada apenas com a lógica de validação
   async function handleLogin() {
@@ -59,8 +61,8 @@ export default function LoginScreen() {
       style={styles.backgroundImage}
       blurRadius={15} // Mantendo o desfoque premium
     >
-      <View style={styles.overlay}>
-        
+      <View style={[styles.overlay, hc && styles.overlayHC]}>
+
         {/* BOTÃO DE VOLTAR NO CANTO SUPERIOR ESQUERDO */}
         <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={24} color="#FFF" />
@@ -132,6 +134,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   backgroundImage: { flex: 1, resizeMode: 'cover' },
   overlay: { flex: 1, backgroundColor: 'rgba(10, 36, 99, 0.80)' }, // Azul marinho escurecido
+  overlayHC: { backgroundColor: '#000000' },
   container: { flex: 1 },
   scrollContainer: { flexGrow: 1, justifyContent: 'center', padding: 20, paddingTop: 80 }, // Padding maior para o botão de voltar
   backButton: {

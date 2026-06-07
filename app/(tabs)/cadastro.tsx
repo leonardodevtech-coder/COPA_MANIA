@@ -14,14 +14,16 @@ import {
 import { FontAwesome5, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAcessibilidade } from '../../lib/acessibilidade';
 
 export default function CadastroScreen() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [confirmarSenha, setConfirmarSenha] = useState('');
-  
-  const router = useRouter(); 
+
+  const router = useRouter();
+  const { altoContraste: hc } = useAcessibilidade();
 
   // Função assíncrona para validar e salvar os dados
   async function handleCadastro() {
@@ -93,7 +95,7 @@ export default function CadastroScreen() {
       style={styles.backgroundImage}
       blurRadius={15} 
     >
-      <View style={styles.overlay}>
+      <View style={[styles.overlay, hc && styles.overlayHC]}>
         
         <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={24} color="#FFF" />
@@ -184,6 +186,7 @@ export default function CadastroScreen() {
 const styles = StyleSheet.create({
   backgroundImage: { flex: 1, resizeMode: 'cover' },
   overlay: { flex: 1, backgroundColor: 'rgba(10, 36, 99, 0.80)' },
+  overlayHC: { backgroundColor: '#000000' },
   container: { flex: 1 },
   scrollContainer: { flexGrow: 1, justifyContent: 'center', padding: 20, paddingTop: 60 },
   backButton: { position: 'absolute', top: 50, left: 20, zIndex: 10, padding: 10, backgroundColor: 'rgba(255,255,255,0.2)', borderRadius: 50 },

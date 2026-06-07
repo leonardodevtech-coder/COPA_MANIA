@@ -5,11 +5,13 @@ import { useRouter, useFocusEffect } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import CardFigurinha from '../components/CardFigurinha';
 import { getUser, abrirPacote, setFotoJogador, todosOsSlots, type Slot } from '../lib/album';
+import { useAcessibilidade } from '../lib/acessibilidade';
 
 const TOTAL = todosOsSlots().length;
 
 export default function LojaScreen() {
   const router = useRouter();
+  const { altoContraste: hc } = useAcessibilidade();
   const [medalhas, setMedalhas] = useState(0);
   const [desbloqueadas, setDesbloqueadas] = useState(0);
   const [aberta, setAberta] = useState<Slot | null>(null);
@@ -58,7 +60,7 @@ export default function LojaScreen() {
 
   return (
     <ImageBackground source={require('../assets/images/background.jpg')} style={styles.bg} blurRadius={12}>
-      <View style={styles.overlay}>
+      <View style={[styles.overlay, hc && styles.overlayHC]}>
         <StatusBar barStyle="light-content" />
 
         <View style={styles.header}>
@@ -143,6 +145,7 @@ export default function LojaScreen() {
 const styles = StyleSheet.create({
   bg: { flex: 1 },
   overlay: { flex: 1, backgroundColor: 'rgba(11, 22, 46, 0.92)', padding: 20 },
+  overlayHC: { backgroundColor: '#000000' },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 50, marginBottom: 16 },
   headerTitle: { fontSize: 20, fontWeight: '900', color: '#E0B953', letterSpacing: 1 },
 

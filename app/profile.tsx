@@ -16,9 +16,11 @@ import { useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getUser, setFotoPerfil } from '../lib/album';
+import { useAcessibilidade } from '../lib/acessibilidade';
 
 export default function ProfileScreen() {
   const router = useRouter();
+  const { altoContraste: hc } = useAcessibilidade();
 
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
@@ -99,12 +101,12 @@ export default function ProfileScreen() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+    <View style={[styles.container, hc && { backgroundColor: '#000000' }]}>
+      <View style={[styles.header, hc && { backgroundColor: '#000000', borderBottomColor: '#FFD400', borderBottomWidth: 2 }]}>
+        <TouchableOpacity style={styles.backButton} onPress={() => router.back()} accessibilityRole="button" accessibilityLabel="Voltar">
           <Ionicons name="arrow-back" size={24} color="#FFF" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Meu Perfil</Text>
+        <Text style={[styles.headerTitle, hc && { color: '#FFD400' }]}>Meu Perfil</Text>
         <View style={{ width: 24 }} />
       </View>
 

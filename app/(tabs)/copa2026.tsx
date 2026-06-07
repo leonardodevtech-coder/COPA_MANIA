@@ -3,9 +3,11 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ImageBackground, 
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import { useRouter, Stack } from 'expo-router';
 import data from '../../data/info_copa2026.json';
+import { useAcessibilidade } from '../../lib/acessibilidade';
 
 export default function CopaInfoScreen() {
   const router = useRouter();
+  const { altoContraste: hc } = useAcessibilidade();
   const [activeIndex, setActiveIndex] = useState(0);
 
   const curiosidades = [
@@ -38,7 +40,7 @@ export default function CopaInfoScreen() {
       style={styles.container} 
       blurRadius={12}
     >
-      <View style={styles.overlay}>
+      <View style={[styles.overlay, hc && styles.overlayHC]}>
         <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
         <Stack.Screen options={{ headerShown: false, title: '' }} />
 
@@ -164,6 +166,7 @@ export default function CopaInfoScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   overlay: { flex: 1, backgroundColor: 'rgba(15, 30, 60, 0.85)' },
+  overlayHC: { backgroundColor: '#000000' },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 24, paddingTop: 60, paddingBottom: 20 },
   backButton: { width: 40, height: 40, justifyContent: 'center', alignItems: 'center' },
   headerTitle: { color: '#E0B953', fontSize: 22, fontWeight: '900', letterSpacing: 1 },

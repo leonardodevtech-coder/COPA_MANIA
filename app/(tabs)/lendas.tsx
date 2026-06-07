@@ -5,6 +5,7 @@ import { useFocusEffect } from 'expo-router';
 import lendasData from '../../data/lendas.json';
 import { lendasImagens } from '../../lib/lendasImagens';
 import { getUser, desbloquearLenda } from '../../lib/album';
+import { useAcessibilidade } from '../../lib/acessibilidade';
 import CardLenda, { type Lenda } from '../../components/CardLenda';
 
 const LENDAS = (lendasData as any).lendas as Lenda[];
@@ -13,6 +14,7 @@ const REPS = 7; // quantas voltas a roleta dá
 const { width: SCREEN_W } = Dimensions.get('window');
 
 export default function LendasScreen() {
+  const { altoContraste: hc } = useAcessibilidade();
   const [unlocked, setUnlocked] = useState<Record<string, boolean>>({});
   const [tacas, setTacas] = useState(0);
   const [msg, setMsg] = useState<string | null>(null);
@@ -92,12 +94,12 @@ export default function LendasScreen() {
   for (let r = 0; r < REPS; r++) tira.push(...LENDAS);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, hc && { backgroundColor: '#000000' }]}>
       <StatusBar barStyle="light-content" />
 
-      <View style={styles.topBar}>
+      <View style={[styles.topBar, hc && { backgroundColor: '#000000', borderBottomWidth: 2, borderBottomColor: '#FFD400' }]}>
         <View>
-          <Text style={styles.title}>Álbum de Lendas</Text>
+          <Text style={[styles.title, hc && { color: '#FFD400' }]}>Álbum de Lendas</Text>
           <Text style={styles.subtitle}>{totalDesbloqueadas}/{LENDAS.length} colecionadas</Text>
         </View>
         <TouchableOpacity style={styles.sortearBtn} onPress={abrirRoleta} activeOpacity={0.85}>
@@ -110,7 +112,7 @@ export default function LendasScreen() {
         {LENDAS.map((l) => {
           const tem = !!unlocked[l.id];
           return (
-            <View key={l.id} style={styles.card}>
+            <View key={l.id} style={[styles.card, hc && { backgroundColor: '#000000', borderColor: '#FFD400', borderWidth: 2 }]}>
               {tem ? (
                 <Image source={lendasImagens[l.id]} style={styles.foto} resizeMode="cover" />
               ) : (

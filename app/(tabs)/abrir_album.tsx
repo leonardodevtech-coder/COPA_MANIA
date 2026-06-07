@@ -5,6 +5,7 @@ import { useFocusEffect, useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import AlbumPage, { type Jogador } from '../../components/AlbumPage';
 import { getUser, setFotoJogador, todosOsSlots, type Figurinha } from '../../lib/album';
+import { useAcessibilidade } from '../../lib/acessibilidade';
 
 const { width } = Dimensions.get('window');
 const dadosSelecoes = require('../../data/selecoes.json');
@@ -12,6 +13,7 @@ const TOTAL_SLOTS = todosOsSlots().length;
 
 export default function AbrirAlbumScreen() {
   const router = useRouter();
+  const { altoContraste: hc } = useAcessibilidade();
   const scrollRef = useRef<ScrollView>(null);
   const [index, setIndex] = useState(0);
   const [figurinhas, setFigurinhas] = useState<Record<string, Figurinha>>({});
@@ -52,9 +54,9 @@ export default function AbrirAlbumScreen() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, hc && { backgroundColor: '#000000' }]}>
       {/* Cabeçalho de status / loja */}
-      <View style={styles.topBar}>
+      <View style={[styles.topBar, hc && { backgroundColor: '#000000', borderBottomWidth: 2, borderBottomColor: '#FFD400' }]}>
         <View style={styles.statusBox}>
           <FontAwesome5 name="medal" size={16} color="#E0B953" />
           <Text style={styles.statusText}>{medalhas}</Text>

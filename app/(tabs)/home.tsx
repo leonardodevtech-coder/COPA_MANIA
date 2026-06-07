@@ -3,9 +3,11 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar, ImageB
 import { FontAwesome5, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { useRouter, useFocusEffect } from 'expo-router';
 import { getUser } from '../../lib/album';
+import { useAcessibilidade } from '../../lib/acessibilidade';
 
 export default function HomeScreen() {
   const router = useRouter();
+  const { altoContraste: hc, alternar } = useAcessibilidade();
 
   const [menuAberto, setMenuAberto] = useState(false);
   const [quizExpandido, setQuizExpandido] = useState(false);
@@ -49,85 +51,107 @@ export default function HomeScreen() {
       style={styles.backgroundImage}
       blurRadius={12} 
     >
-      <View style={styles.overlay}>
+      <View style={[styles.overlay, hc && { backgroundColor: '#000000' }]}>
         <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
-        
+
         <View style={styles.header}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <TouchableOpacity onPress={() => setMenuAberto(true)} style={{ marginRight: 15 }}>
-              <Ionicons name="menu" size={34} color="#E0B953" />
+            <TouchableOpacity
+              onPress={() => setMenuAberto(true)}
+              style={{ marginRight: 15 }}
+              accessibilityRole="button"
+              accessibilityLabel="Abrir menu"
+            >
+              <Ionicons name="menu" size={34} color={hc ? '#FFD400' : '#E0B953'} />
             </TouchableOpacity>
             <View>
-              <Text style={styles.greeting}>Rumo ao Mundial,</Text>
-              <Text style={styles.headerTitle}>COPA MANIA</Text>
+              <Text style={[styles.greeting, hc && { color: '#FFFFFF' }]}>Rumo ao Mundial,</Text>
+              <Text style={[styles.headerTitle, hc && { color: '#FFD400' }]}>COPA MANIA</Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.avatarContainer} onPress={() => router.push('/profile' as any)}>
-            {avatarUri ? (
-              <Image source={{ uri: avatarUri }} style={styles.avatarImg} />
-            ) : (
-              <FontAwesome5 name="user-alt" size={18} color="#0B101E" />
-            )}
-          </TouchableOpacity>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+            <TouchableOpacity
+              onPress={alternar}
+              style={[styles.contrasteBtn, hc && styles.contrasteBtnAtivo]}
+              accessibilityRole="switch"
+              accessibilityLabel="Modo de alto contraste"
+              accessibilityHint="Aumenta o contraste das cores para melhor legibilidade"
+              accessibilityState={{ checked: hc }}
+            >
+              <MaterialCommunityIcons name="contrast-circle" size={26} color={hc ? '#000000' : '#E0B953'} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.avatarContainer, hc && { backgroundColor: '#FFD400', borderColor: '#FFFFFF' }]}
+              onPress={() => router.push('/profile' as any)}
+              accessibilityRole="button"
+              accessibilityLabel="Meu perfil"
+            >
+              {avatarUri ? (
+                <Image source={{ uri: avatarUri }} style={styles.avatarImg} />
+              ) : (
+                <FontAwesome5 name="user-alt" size={18} color="#0B101E" />
+              )}
+            </TouchableOpacity>
+          </View>
         </View>
 
         <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
           <View style={styles.sectionContainer}>
-            <View style={styles.heroCard}>
+            <View style={[styles.heroCard, hc && styles.cardHC]}>
               <View style={styles.heroContent}>
                 <View style={styles.heroTextSection}>
-                  <View style={styles.badge}><Text style={styles.badgeText}>COPA DO MUNDO 2026</Text></View>
+                  <View style={[styles.badge, hc && { backgroundColor: '#FFD400' }]}><Text style={[styles.badgeText, hc && { color: '#000' }]}>COPA DO MUNDO 2026</Text></View>
                   <Text style={styles.heroTitle}>Meu Álbum</Text>
-                  <Text style={styles.heroSubtitle}>Colecione os astros e as seleções da América do Norte.</Text>
+                  <Text style={[styles.heroSubtitle, hc && { color: '#FFFFFF' }]}>Colecione os astros e as seleções da América do Norte.</Text>
                 </View>
-                <View style={styles.heroIconWrapper}><FontAwesome5 name="book" size={32} color="#E0B953" /></View>
+                <View style={styles.heroIconWrapper}><FontAwesome5 name="book" size={32} color={hc ? '#FFD400' : '#E0B953'} /></View>
               </View>
-              <TouchableOpacity style={styles.heroButton} onPress={() => router.push('/abrir_album' as any)}>
-                <Text style={styles.heroButtonText}>Abrir Álbum</Text>
-                <Ionicons name="arrow-forward" size={18} color="#FFF" />
+              <TouchableOpacity style={[styles.heroButton, hc && { backgroundColor: '#FFD400' }]} onPress={() => router.push('/abrir_album' as any)} accessibilityRole="button" accessibilityLabel="Abrir Álbum">
+                <Text style={[styles.heroButtonText, hc && { color: '#000' }]}>Abrir Álbum</Text>
+                <Ionicons name="arrow-forward" size={18} color={hc ? '#000' : '#FFF'} />
               </TouchableOpacity>
             </View>
           </View>
 
           <View style={styles.sectionContainer}>
-            <Text style={styles.sectionHeaderTitle}>Aquecimento 2026</Text>
-            
+            <Text style={[styles.sectionHeaderTitle, hc && { color: '#FFFFFF' }]}>Aquecimento 2026</Text>
+
             <View style={styles.grid}>
-              <TouchableOpacity style={styles.actionCard} onPress={() => router.push('/quiz' as any)}>
-                <View style={[styles.iconBox, { backgroundColor: 'rgba(224, 185, 83, 0.15)' }]}>
-                  <MaterialCommunityIcons name="trophy-award" size={24} color="#E0B953" />
+              <TouchableOpacity style={[styles.actionCard, hc && styles.cardHC]} onPress={() => router.push('/quiz' as any)} accessibilityRole="button" accessibilityLabel="Quiz da Copa">
+                <View style={[styles.iconBox, { backgroundColor: hc ? '#000' : 'rgba(224, 185, 83, 0.15)' }]}>
+                  <MaterialCommunityIcons name="trophy-award" size={24} color={hc ? '#FFD400' : '#E0B953'} />
                 </View>
-                <Text style={styles.cardTitle}>Quiz da Copa</Text>
+                <Text style={[styles.cardTitle, hc && { color: '#FFF' }]}>Quiz da Copa</Text>
               </TouchableOpacity>
-              
-              <TouchableOpacity style={styles.actionCard} onPress={() => router.push('/loja' as any)}>
-                <View style={[styles.iconBox, { backgroundColor: 'rgba(17, 139, 68, 0.15)' }]}>
-                  <FontAwesome5 name="shopping-cart" size={20} color="#118B44" />
+
+              <TouchableOpacity style={[styles.actionCard, hc && styles.cardHC]} onPress={() => router.push('/loja' as any)} accessibilityRole="button" accessibilityLabel="Comprar Pacotes">
+                <View style={[styles.iconBox, { backgroundColor: hc ? '#000' : 'rgba(17, 139, 68, 0.15)' }]}>
+                  <FontAwesome5 name="shopping-cart" size={20} color={hc ? '#FFD400' : '#118B44'} />
                 </View>
-                <Text style={styles.cardTitle}>Comprar Pacotes</Text>
+                <Text style={[styles.cardTitle, hc && { color: '#FFF' }]}>Comprar Pacotes</Text>
               </TouchableOpacity>
             </View>
 
-            <TouchableOpacity style={styles.fullWidthCard} activeOpacity={0.8} onPress={() => router.push('/copa2026' as any)}>
-              <View style={[styles.iconBox, { backgroundColor: 'rgba(224, 185, 83, 0.15)', marginBottom: 0, marginRight: 16 }]}>
-                <Ionicons name="map" size={24} color="#E0B953" />
+            <TouchableOpacity style={[styles.fullWidthCard, hc && styles.cardHC]} activeOpacity={0.8} onPress={() => router.push('/copa2026' as any)} accessibilityRole="button" accessibilityLabel="Explorar Copa 2026">
+              <View style={[styles.iconBox, { backgroundColor: hc ? '#000' : 'rgba(224, 185, 83, 0.15)', marginBottom: 0, marginRight: 16 }]}>
+                <Ionicons name="map" size={24} color={hc ? '#FFD400' : '#E0B953'} />
               </View>
               <View style={{ flex: 1 }}>
-                <Text style={styles.cardTitle}>Explorar Copa 2026</Text>
-                <Text style={{ color: '#B0C4DE', fontSize: 12, marginTop: 4 }}>Estádios, Sedes, Mascotes e Seleções</Text>
+                <Text style={[styles.cardTitle, hc && { color: '#FFF' }]}>Explorar Copa 2026</Text>
+                <Text style={{ color: hc ? '#FFFFFF' : '#B0C4DE', fontSize: 12, marginTop: 4 }}>Estádios, Sedes, Mascotes e Seleções</Text>
               </View>
-              <Ionicons name="chevron-forward" size={20} color="#E0B953" />
+              <Ionicons name="chevron-forward" size={20} color={hc ? '#FFD400' : '#E0B953'} />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.fullWidthCard} activeOpacity={0.8} onPress={() => router.push('/historico' as any)}>
-              <View style={[styles.iconBox, { backgroundColor: 'rgba(17, 139, 68, 0.15)', marginBottom: 0, marginRight: 16 }]}>
-                <Ionicons name="time-outline" size={24} color="#118B44" />
+            <TouchableOpacity style={[styles.fullWidthCard, hc && styles.cardHC]} activeOpacity={0.8} onPress={() => router.push('/historico' as any)} accessibilityRole="button" accessibilityLabel="Histórico das Copas">
+              <View style={[styles.iconBox, { backgroundColor: hc ? '#000' : 'rgba(17, 139, 68, 0.15)', marginBottom: 0, marginRight: 16 }]}>
+                <Ionicons name="time-outline" size={24} color={hc ? '#FFD400' : '#118B44'} />
               </View>
               <View style={{ flex: 1 }}>
-                <Text style={styles.cardTitle}>Histórico das Copas</Text>
-                <Text style={{ color: '#B0C4DE', fontSize: 12, marginTop: 4 }}>Relembre os campeões e momentos marcantes.</Text>
+                <Text style={[styles.cardTitle, hc && { color: '#FFF' }]}>Histórico das Copas</Text>
+                <Text style={{ color: hc ? '#FFFFFF' : '#B0C4DE', fontSize: 12, marginTop: 4 }}>Relembre os campeões e momentos marcantes.</Text>
               </View>
-              <Ionicons name="chevron-forward" size={20} color="#118B44" />
+              <Ionicons name="chevron-forward" size={20} color={hc ? '#FFD400' : '#118B44'} />
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -197,6 +221,9 @@ const styles = StyleSheet.create({
   headerTitle: { color: '#E0B953', fontSize: 22, fontWeight: '900', letterSpacing: 1 },
   avatarContainer: { width: 45, height: 45, backgroundColor: '#E0B953', borderRadius: 25, justifyContent: 'center', alignItems: 'center', borderWidth: 2, borderColor: '#1A2235', overflow: 'hidden' },
   avatarImg: { width: '100%', height: '100%' },
+  contrasteBtn: { width: 45, height: 45, borderRadius: 25, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(224, 185, 83, 0.15)', borderWidth: 2, borderColor: 'rgba(224, 185, 83, 0.4)' },
+  contrasteBtnAtivo: { backgroundColor: '#FFD400', borderColor: '#FFFFFF' },
+  cardHC: { backgroundColor: '#000000', borderColor: '#FFD400', borderWidth: 2 },
   scrollContent: { paddingBottom: 40 },
   sectionContainer: { marginBottom: 24, paddingHorizontal: 24 },
   sectionHeaderTitle: { color: '#FFFFFF', fontSize: 18, fontWeight: '700', marginBottom: 16, letterSpacing: 0.5 },

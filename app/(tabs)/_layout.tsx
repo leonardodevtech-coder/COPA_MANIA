@@ -2,21 +2,24 @@ import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform, View, StyleSheet } from 'react-native';
+import { useAcessibilidade } from '../../lib/acessibilidade';
 
 export default function TabLayout() {
+  const { altoContraste: hc } = useAcessibilidade();
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#118B44',
-        tabBarInactiveTintColor: '#888',
+        tabBarActiveTintColor: hc ? '#FFD400' : '#118B44',
+        tabBarInactiveTintColor: hc ? '#FFFFFF' : '#888',
         tabBarLabelStyle: {
-          fontSize: 11,
-          fontWeight: '600',
+          fontSize: hc ? 12 : 11,
+          fontWeight: hc ? '900' : '600',
         },
         tabBarStyle: {
-          backgroundColor: '#131A2F',
-          borderTopColor: '#1E2538',
+          backgroundColor: hc ? '#000000' : '#131A2F',
+          borderTopColor: hc ? '#FFD400' : '#1E2538',
+          borderTopWidth: hc ? 2 : StyleSheet.hairlineWidth,
           height: Platform.OS === 'ios' ? 85 : 70,
           paddingBottom: Platform.OS === 'ios' ? 20 : 5,
         }

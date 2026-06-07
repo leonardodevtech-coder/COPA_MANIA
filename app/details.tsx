@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
+import { useAcessibilidade } from '../lib/acessibilidade';
 
 // Importando os dados do JSON atualizado
 const dadosSelecoes = require('../data/selecoes.json');
@@ -9,6 +10,7 @@ const dadosSelecoes = require('../data/selecoes.json');
 export default function DetailsScreen() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
+  const { altoContraste: hc } = useAcessibilidade();
 
   // Busca a seleção específica pelo ID
   const selecao = dadosSelecoes.selecoes.find((s: any) => s.id.toString() === id);
@@ -25,7 +27,7 @@ export default function DetailsScreen() {
   const { principal, secundaria, texto } = selecao.cores;
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView style={[styles.container, hc && { backgroundColor: '#000000' }]} showsVerticalScrollIndicator={false}>
       <StatusBar barStyle="light-content" backgroundColor={principal} />
 
       {/* CABEÇALHO COM A COR DA SELEÇÃO */}
@@ -46,10 +48,10 @@ export default function DetailsScreen() {
       <View style={styles.body}>
         
         {/* Descrição e Mascote */}
-        <Text style={styles.descricao}>{selecao.descricao}</Text>
+        <Text style={[styles.descricao, hc && { color: '#FFFFFF' }]}>{selecao.descricao}</Text>
         <View style={styles.mascoteRow}>
-          <MaterialCommunityIcons name="cat" size={20} color={principal} />
-          <Text style={styles.mascoteText}>Mascote: <Text style={{fontWeight: 'bold'}}>{selecao.mascote}</Text></Text>
+          <MaterialCommunityIcons name="cat" size={20} color={hc ? '#FFD400' : principal} />
+          <Text style={[styles.mascoteText, hc && { color: '#FFFFFF' }]}>Mascote: <Text style={{fontWeight: 'bold'}}>{selecao.mascote}</Text></Text>
         </View>
 
         {/* ESTATÍSTICAS RÁPIDAS (Painel) */}

@@ -4,6 +4,7 @@ import { Ionicons, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-ico
 import { useRouter, useFocusEffect } from 'expo-router';
 import quizData from '../data/quiz.json';
 import { getUser } from '../lib/album';
+import { useAcessibilidade } from '../lib/acessibilidade';
 
 const temas = (quizData as any).temas as {
   id: string; titulo: string; icon: string; iconLib: string; color: string; perguntas: any[];
@@ -11,6 +12,7 @@ const temas = (quizData as any).temas as {
 
 export default function QuizScreen() {
   const router = useRouter();
+  const { altoContraste: hc } = useAcessibilidade();
   const [medalhas, setMedalhas] = useState(0);
   const [tacas, setTacas] = useState(0);
 
@@ -29,7 +31,7 @@ export default function QuizScreen() {
       style={styles.backgroundImage}
       blurRadius={12}
     >
-      <View style={styles.overlay}>
+      <View style={[styles.overlay, hc && styles.overlayHC]}>
         <StatusBar barStyle="light-content" />
 
         <View style={styles.header}>
@@ -97,6 +99,7 @@ export default function QuizScreen() {
 const styles = StyleSheet.create({
   backgroundImage: { flex: 1 },
   overlay: { flex: 1, backgroundColor: 'rgba(15, 30, 60, 0.85)', padding: 20 },
+  overlayHC: { backgroundColor: '#000000' },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 50, marginBottom: 20 },
   headerTitle: { fontSize: 24, fontWeight: '900', color: '#E0B953', letterSpacing: 1 },
 

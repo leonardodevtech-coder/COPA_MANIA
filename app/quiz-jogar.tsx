@@ -4,6 +4,7 @@ import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import quizData from '../data/quiz.json';
 import { addMedalhas, concluirQuiz } from '../lib/album';
+import { useAcessibilidade } from '../lib/acessibilidade';
 
 interface Pergunta {
   pergunta: string;
@@ -25,6 +26,7 @@ function montarPerguntas(modo: string, temaId?: string): Pergunta[] {
 
 export default function QuizJogarScreen() {
   const router = useRouter();
+  const { altoContraste: hc } = useAcessibilidade();
   const { modo, tema } = useLocalSearchParams<{ modo: string; tema?: string }>();
 
   const perguntas = useMemo(() => montarPerguntas(modo || 'tema', tema), [modo, tema]);
@@ -79,7 +81,7 @@ export default function QuizJogarScreen() {
       style={styles.bg}
       blurRadius={12}
     >
-      <View style={styles.overlay}>
+      <View style={[styles.overlay, hc && styles.overlayHC]}>
         <StatusBar barStyle="light-content" />
 
         <View style={styles.header}>
@@ -172,6 +174,7 @@ export default function QuizJogarScreen() {
 const styles = StyleSheet.create({
   bg: { flex: 1 },
   overlay: { flex: 1, backgroundColor: 'rgba(15, 30, 60, 0.9)', padding: 20 },
+  overlayHC: { backgroundColor: '#000000' },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 50, marginBottom: 20 },
   headerTitle: { fontSize: 20, fontWeight: '900', color: '#E0B953', letterSpacing: 1 },
 

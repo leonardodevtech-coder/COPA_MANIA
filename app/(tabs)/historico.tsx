@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, ScrollView, Image, ImageBackground, StatusBar, 
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import historicoData from '../../data/historico_copas.json';
+import { estadiosImagens } from '../../lib/estadiosImagens';
+import { useAcessibilidade } from '../../lib/acessibilidade';
 
 interface Copa {
   ano: number;
@@ -31,24 +33,26 @@ const COPAS = historicoData.historico as Copa[];
 
 export default function HistoricoScreen() {
   const router = useRouter();
+  const { altoContraste: hc } = useAcessibilidade();
+  const ouro = hc ? '#FFD400' : '#E0B953';
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, hc && { backgroundColor: '#000000' }]}>
       <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
 
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+      <View style={[styles.header, hc && { backgroundColor: '#000000', borderBottomWidth: 2, borderBottomColor: '#FFD400' }]}>
+        <TouchableOpacity onPress={() => router.back()} style={styles.backButton} accessibilityRole="button" accessibilityLabel="Voltar">
           <Ionicons name="arrow-back" size={28} color="#FFF" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Histórico das Copas</Text>
+        <Text style={[styles.headerTitle, hc && { color: '#FFD400' }]}>Histórico das Copas</Text>
         <View style={{ width: 28 }} />
       </View>
 
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         {COPAS.map((copa, index) => (
-          <View key={index} style={styles.card}>
+          <View key={index} style={[styles.card, hc && { backgroundColor: '#000000', borderColor: '#FFD400', borderWidth: 2 }]}>
             {/* Banner: estádio da final */}
-            <ImageBackground source={{ uri: copa.imagemEstadio }} style={styles.banner} imageStyle={styles.bannerImg}>
+            <ImageBackground source={estadiosImagens[copa.ano]} style={styles.banner} imageStyle={styles.bannerImg}>
               <View style={styles.bannerOverlay}>
                 <View style={styles.anoBadge}>
                   <Text style={styles.anoText}>{copa.ano}</Text>
@@ -97,23 +101,23 @@ export default function HistoricoScreen() {
               {/* Infos do estádio / público / dados */}
               <View style={styles.infoGrid}>
                 <View style={styles.infoItem}>
-                  <Ionicons name="business" size={15} color="#E0B953" />
+                  <Ionicons name="business" size={15} color={ouro} />
                   <Text style={styles.infoText}>{copa.estadioFinal} · {copa.cidadeFinal}</Text>
                 </View>
                 <View style={styles.infoItem}>
-                  <Ionicons name="people" size={15} color="#E0B953" />
+                  <Ionicons name="people" size={15} color={ouro} />
                   <Text style={styles.infoText}>{copa.publico} torcedores na final</Text>
                 </View>
                 <View style={styles.infoItem}>
-                  <FontAwesome5 name="futbol" size={13} color="#E0B953" />
+                  <FontAwesome5 name="futbol" size={13} color={ouro} />
                   <Text style={styles.infoText}>Artilheiro: {copa.artilheiro}</Text>
                 </View>
                 <View style={styles.infoItem}>
-                  <FontAwesome5 name="star" size={13} color="#E0B953" />
+                  <FontAwesome5 name="star" size={13} color={ouro} />
                   <Text style={styles.infoText}>Melhor jogador: {copa.melhorJogador}</Text>
                 </View>
                 <View style={styles.infoItem}>
-                  <FontAwesome5 name="flag" size={13} color="#E0B953" />
+                  <FontAwesome5 name="flag" size={13} color={ouro} />
                   <Text style={styles.infoText}>{copa.participantes} seleções participantes</Text>
                 </View>
               </View>
