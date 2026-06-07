@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar, ImageBackground, Modal } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar, ImageBackground, Modal, Alert } from 'react-native'; // Importei Alert
 import { FontAwesome5, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
@@ -21,6 +21,18 @@ export default function HomeScreen() {
     setMenuAberto(false);
     setQuizExpandido(false);
     router.push(rota as any);
+  };
+
+  // FUNÇÃO DE CONFIRMAÇÃO DE SAÍDA
+  const confirmLogout = () => {
+    Alert.alert(
+      "Confirmar Saída",
+      "Tem certeza que deseja sair da sua conta?",
+      [
+        { text: "Cancelar", style: "cancel" },
+        { text: "Sim, Sair", style: "destructive", onPress: () => router.replace('/login') }
+      ]
+    );
   };
 
   return (
@@ -149,6 +161,12 @@ export default function HomeScreen() {
               <TouchableOpacity style={styles.menuItem} onPress={() => navegarPara('/sobre')}>
                 <Ionicons name="information-circle" size={24} color="#B0C4DE" style={styles.menuIcon} />
                 <Text style={[styles.menuItemText, { color: '#B0C4DE' }]}>Sobre o Projeto</Text>
+              </TouchableOpacity>
+
+              <View style={styles.menuDivider} />
+              <TouchableOpacity style={styles.menuItem} onPress={confirmLogout}>
+                <Ionicons name="log-out-outline" size={24} color="#FF5252" style={styles.menuIcon} />
+                <Text style={[styles.menuItemText, { color: '#FF5252' }]}>Sair</Text>
               </TouchableOpacity>
             </View>
           </View>
